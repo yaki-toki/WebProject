@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>자기소개 Form</title>
+
+<link href="style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+	<header class="header">
+		<h1>201403010 김지하</h1>
+	</header>
+	<nav class="nav">
+		<a href="http://www.naver.com" target="naver">홈</a>
+	</nav>
+	<section class="section">
+		<h2>김지하 소개</h2>
+		<hr>
+		<ul>
+		<!--  -->
+			<li>학번 : 201403010</li>
+			<li>학과 : 컴퓨터 소프트웨어</li>
+		</ul>
+		<h3>자기소개</h3>
+		<p>안녕하세요 저는 김지하 입니다.</p>
+	</section>
+	<aside class="aside">
+		<div class="form3">
+			<table>
+				<!-- 로그인 폼을 div로 묶어서 form3으로 지정 해서 테이블로 선언 -->
+				<tr>
+					<!-- 첫 번째 열 -->
+					<td class="classtd"><label class="label fontsize">아이디</label></td>
+					<!-- 첫 번째 열의 1행을 지정하는 부분 classtd스타일을 가져온 뒤 label을 label과 fontsize로 지정 -->
+					<td><div class="pop">
+							<!-- 해당 div틀을 pop로 지정 -->
+							<input class="popop" type="text" placeholder="아이디 입력">
+							<!-- input의 css스타일을 popop로 선언 #참고 : 네이버 폼 -->
+						</div></td>
+					<td rowspan="3">
+						<!-- 3번째 행의 모든 열을 합친다. --> <input type="button" value="로그인"
+						class="button"> <!-- 합쳐진 셀에 버튼을 만든다. -->
+					</td>
+				</tr>
+				<tr>
+					<!-- 두 번째 열 -->
+					<td class="classtd"><label class="label fontsize">비밀번호</label></td>
+					<td><div class="pop">
+							<input class="popop" type="password" placeholder="비밀번호 입력">
+							<!-- 해당 input의 타입은 password로 선언해서 password의 입력 형태를 만듬 -->
+						</div></td>
+				</tr>
+			</table>
+		</div>
+		<div class="display">
+		<!-- 이미지 테그를 위한 div테그 절대위치가 선언된 display를 사용  -->
+			<img src="test.PNG" width="200" height="200">
+		</div>
+	</aside>
+	<footer class="footer">
+		<h5 style="text-align: center">copyright&#169; by kim</h5>
+		<!-- h5태그의 택스트 위치를 center로 지정 &#169 : 컴퍼티 문자 -->
+	</footer>
+</body>
+</html>

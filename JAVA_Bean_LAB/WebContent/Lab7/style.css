@@ -1,0 +1,29 @@
+<!-- 201403010 김지하 -->
+@charset "UTF-8";
+
+fieldset {
+	border: none 0;
+}
+
+legend {
+	position: absolute;
+	left: -9999px;
+}
+
+#container {
+	width: 520px;
+	border: 1px solid black;
+	padding: 20px 40px;
+	margin: 0 auto
+}
+
+p {
+	font -size: 12px;
+	color: black;
+	font-style:oblique;
+}
+
+span {
+	font -size: 12px;
+	color: black
+}
