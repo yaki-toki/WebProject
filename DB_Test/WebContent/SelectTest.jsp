@@ -8,15 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table width = "550px" border="1">
+	<table border="1">
 		<thead>
 			<tr>
-				<td >ID</td>
+				<td >Num</td>
+				<td>ID</td>
 				<td>Password</td>
+				<td>Date</td>
 				<td>Name</td>
-				<td>Age</td>
-				<td>Gender</td>
-				<td>E-mail</td>
+				<td>Address</td>
+				<td>Tel</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -51,6 +52,9 @@
 						s = new String(s.getBytes());
 						out.println("<td>" + s + "</td>");
 						s = rs.getString(6);
+						s = new String(s.getBytes());
+						out.println("<td>" + s + "</td>");
+						s = rs.getString(7);
 						s = new String(s.getBytes());
 						out.println("<td>" + s + "</td>");
 						out.print("</tr>");

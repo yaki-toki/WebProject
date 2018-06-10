@@ -46,4 +46,5 @@
 			} catch (SQLException sqle) {
 			}
 	}
+	out.println("<script> location.href='insertForm.jsp'; </script>");
 %>
