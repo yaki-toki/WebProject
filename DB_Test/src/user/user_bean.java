@@ -3,18 +3,18 @@ package user;
 import java.sql.Timestamp;
 
 public class user_bean {
-	private String idt;
+	private String id;
 	private String passwd;
 	private String name;
 	private String addr;
 	private String tel;
 	private Timestamp reg_date;
 	
-	public String getIdt() {
-		return idt;
+	public String getId() {
+		return id;
 	}
-	public void setIdt(String idt) {
-		this.idt = idt;
+	public void setIdt(String id) {
+		this.id = id;
 	}
 	public String getPasswd() {
 		return passwd;
