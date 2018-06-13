@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<style>
+.tab ul li {
+	float: left;
+	margin: 0;
+	padding: 5px;
+	border: 1px solid #006633;
+	background-color: #CCFDC4
+}
+
+.contents {
+	border: 1px solid #006633;
+	clear: both;
+	margin: 0;
+}
+</style>
+<script type="text/javascript">
+	function showTabMenu(n) {
+		var conId;
+
+		for (i = 1; i < 4; i++) {
+			conId = document.getElementById("con" + i);
+			if (i == n) {
+				conId.style.display = "";
+			} else {
+				conId.style.display = "none";
+			}
+		}
+	}
+</script>
+</head>
+<body>
+	<div class="tab">
+		<ul>
+			<a href="javascript:showTabMenu(1)">탭 메뉴1</a>
+			<a href="javascript:showTabMenu(2)">탭 메뉴2</a>
+			<a href="javascript:showTabMenu(3)">탭 메뉴3</a>
+		</ul>
+	</div>
+	<div>
+		<div class="contents" id="con1">탭 메뉴1 입니다.</div>
+		<div class="contents" id="con2" style="display: none">탭 메뉴2 입니다.</div>
+		<div class="contents" id="con3" style="display: none">탭 메뉴3 입니다.</div>
+	</div>
+</body>
+</html>
