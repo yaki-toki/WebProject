@@ -13,6 +13,6 @@
 <body>
 <!-- 처음 main을 실행 시켰을 때 출력되는 페이지 -->
 <h1 align="center">차량 등록 사이트</h1>
-<p align="center"><img src="img/01.PNG" width="100%" height="100%">
+<p align="center"><img src="img/01.PNG" width="80%" height="80%">
 </body>
 </html>
