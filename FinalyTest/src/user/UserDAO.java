@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserDAO {
+public class UserDAO extends User{
 
 	// 생성과 동시에 custom_num DB에 접근하여 num의 최대값을 가져온다.
 	private Connection conn;
@@ -21,7 +21,7 @@ public class UserDAO {
 	public UserDAO() {
 
 		try {
-			String DB_URL = "jdbc:mysql://203.255.177.208:3306/test12";
+			String DB_URL = "jdbc:mysql://203.255.177.208:3306/test12?useUnicode=true&characterEncoding=utf8";
 			String DB_USER = "test12";
 			String DB_PASSWORD = "test1234";
 			// DB URL,ID,PASSWORD
@@ -33,6 +33,21 @@ public class UserDAO {
 			System.out.println("Exception Error...");
 			System.out.println(e.toString());
 		}
+	}
+	
+	public ResultSet SetUser(String userID) {
+		String SQL = "select * from member where userID=?";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			rs.next();
+			//2~8 ID, PW, 이름, 나이, 성별, 이메일, 전화번호
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return rs;
 	}
 	
 	public int IDChk(String userID) {
@@ -64,8 +79,8 @@ public class UserDAO {
 		return -1;// 데이터베이스 오류
 	}
 
-	public int join(User user) {
-		String SQL = "insert into member values(null,?,?,?,?,?,?,?,?)";
+	public int join(User user){
+		String SQL = "insert into member values(?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, user.getUserID());
@@ -76,10 +91,18 @@ public class UserDAO {
 			pstmt.setString(6, user.getUserEmail());
 			pstmt.setString(7, user.getUserPhone());
 			pstmt.setTimestamp(8, user.getReg_date());
-			
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return -1;// DB Error
 	}
@@ -101,6 +124,15 @@ public class UserDAO {
 			return -1;//ID없음
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return -2; // DB오류
 	}
@@ -115,22 +147,41 @@ public class UserDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return rs;
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		
 	}
-	
-	public int UserIDX(String userID) {
+	public int UpdateUser(User user) {
+		String SQL = "update member set userPassword=?,userName=?,userAge=?,userGender=?, userEmail=?,userPhone=? where userID=?";
 		try {
-			String SQL = "SELECT * FROM member where userID = ?";
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, userID);
-			rs = pstmt.executeQuery();
-			rs.next();
-			return rs.getInt(1);
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
+			pstmt.setString(1, user.getUserPassword());
+			pstmt.setString(2, user.getUserName());
+			pstmt.setInt(3, user.getUserAge());
+			pstmt.setString(4, user.getUserGender());
+			pstmt.setString(5, user.getUserEmail());
+			pstmt.setString(6, user.getUserPhone());
+			pstmt.setString(7, user.getUserID());
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
 			e.printStackTrace();
-			return -1;
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		return -1;// DB Error
 	}
 }

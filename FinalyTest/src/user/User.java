@@ -11,7 +11,7 @@ public class User {
 	private String userEmail;
 	private String userPhone;
 	private Timestamp reg_date;
-	
+
 	public String getUserID() {
 		return userID;
 	}
