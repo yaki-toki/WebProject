@@ -43,7 +43,7 @@
 				try {
 					Class.forName(driverName);
 					con = DriverManager.getConnection(url, user, psw);
-					String sql = "SELECT * FROM information";
+					String sql = "SELECT * FROM model";
 					ps = con.prepareStatement(sql);
 					ResultSet rs = ps.executeQuery();
 		%>

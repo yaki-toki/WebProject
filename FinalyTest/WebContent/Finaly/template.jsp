@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Underground의 쇼핑몰</title>
+<title>Underground의 자동차 등록 센터</title>
 
 <link href="style.css" type="text/css" rel="stylesheet">
 <!-- css파일을 호출하기 위한 link태그 -->

@@ -23,41 +23,18 @@
 		}
 	}
 
-	function checkPwd() {
-		var txt = document.getElementById("pwd_chk");
-		//span태그의 식별자를 받아옴
-		txt.innerHTML = "";
-		//공백으로 초기화
-		if (userPassword.value == userPassword2.value) {
-			//두 비밀 번호가 같은 경우
-			if (userPassword.value == "") {
-				//첫 번째 비밀 번호가 비어있는 경우
-				txt.style.color = 'red';
-				txt.innerHTML = "*비밀번호를 입력해 주세요";
-				//비밀번호를 입력하라는 문구 출력
-			} else {
-				txt.style.color = 'blue';
-				txt.innerHTML = "*비밀번호가 일치합니다.";
-				//비밀번호가 서로 일치한 경우 파란 색 글씨로 표시
-			}
-		} else {
-			txt.style.color = 'red';
-			txt.innerHTML = "*비밀번호가 일치하지 않습니다.";
-			//비밀번호가 일치하지 않는 경우
-		}
-	}
-
 	function subCheck() {
 		theForm = document.form1;
 		//Form태그의 식별자를 정의
 		if (theForm.userName.value == "" || theForm.userPassword.value == ""
-				|| theForm.userPassword2.value == "" || theForm.userID.value == "") {
+				|| theForm.userPassword2.value == ""
+				|| theForm.userID.value == "") {
 			//Form의 안에 있는 식별자들의 값이 하나라도 비어있으면 출력
 			alert("정확하게 입력해주세요!");
 			//정확하게 입력해 달라고 표시
 		} else {
 			//비어있지 않는 경우
-			var chk_radio = document.getElementsByuserName('userGender');
+			var chk_radio = document.getElementsByName('userGender');
 			var sel_type = null;
 			//라디오 박스 체크 확인을 위한 인자값 선언
 
@@ -98,45 +75,77 @@
 </head>
 <body class="mybody">
 	<div>
-		<fieldset style="width:500px; margin: 0 auto; ">
+		<fieldset style="width: 500px; margin: 0 auto;">
 			<h1>회원가입</h1>
 			<p style="color: red; font-size: 11px">모든 항목을 모두 채워주세요.</p>
 			<hr>
-			<form userName="form1" id="form1" action="main.jsp?pagefile=join_pro" method="post">
-
+			<form userName="form1" id="form1" action="main.jsp?pagefile=join_pro"
+				method="post">
+				<script type="text/javascript">
+					function checkPwd() {
+						var txt = document.getElementById("pwd_chk");
+						//span태그의 식별자를 받아옴
+						txt.innerHTML = "";
+						//공백으로 초기화
+						var userPassword = document.getElementById("userPassword");
+						var userPassword2 = document.getElementById("userPassword2");
+						
+						if (userPassword.value == userPassword2.value) {
+							//두 비밀 번호가 같은 경우
+							if (userPassword.value == "") {
+								//첫 번째 비밀 번호가 비어있는 경우
+								txt.style.color = 'red';
+								txt.innerHTML = "*비밀번호를 입력해 주세요";
+								//비밀번호를 입력하라는 문구 출력
+							} else {
+								txt.style.color = 'blue';
+								txt.innerHTML = "*비밀번호가 일치합니다.";
+								//비밀번호가 서로 일치한 경우 파란 색 글씨로 표시
+							}
+						} else {
+							txt.style.color = 'red';
+							txt.innerHTML = "*비밀번호가 일치하지 않습니다.";
+							//비밀번호가 일치하지 않는 경우
+						}
+					}
+				</script>
 				<p class="p">아이디</p>
-				<input type="text" id="userID" name="userID" onblur="checkFilled(this)" value="">
-				<span class="span" id="id_chk" style="color: red; font-size: 10px"></span>
+				<input type="text" id="userID" name="userID"
+					onblur="checkFilled(this)" value="" required> <span class="span"
+					id="id_chk" style="color: red; font-size: 10px"></span>
 				<!-- 스펜 테그의 초기 값을 빨간색으로 설정하고 폰트 크기를 10px로 설정 -->
 
 				<p class="p">비밀번호</p>
-				<input type="password" id="userPassword" name="userPassword" placeholder="비밀번호">
+				<input type="password" id="userPassword" name="userPassword"
+					placeholder="비밀번호" required>
 
 				<p class="p">비밀번호 재확인</p>
-				<input type="password" id="userPassword2" name="userPassword2" placeholder="비밀번호 재확인"
-					onblur="checkPwd()">
+				<input type="password" id="userPassword2" name="userPassword2"
+					placeholder="비밀번호 재확인" onblur="checkPwd()" required>
 				<!-- 비밀번호 검사를 위해서 검사를 진행하는 함수를 호출해서 실행한다.  -->
 				<span class="span" id="pwd_chk" style="color: red; font-size: 10px"></span>
 				<!-- 비밀번호를 검사한 후 출력되는 메시지를 설정한다. -->
 
 				<p class="p">이름</p>
-				<input type="text" placeholder="이름" id="userName" name="userName">
-				
+				<input type="text" placeholder="이름" id="userName" name="userName" required>
+
 				<p class="p">나이</p>
-				<input type="text" placeholder="나이" id="userAge" name="userAge">
+				<input type="text" placeholder="나이" id="userAge" name="userAge" required>
 
 				<p class="p">성별</p>
 				<input type="radio" Name="userGender" id="userGender" value="Male"><span
 					class="span">남자</span> <input type="radio" Name="userGender"
 					id="userGender" value="Female"><span class="span">여자</span>
 				<!-- 성별 선택을 위해서 radio타입으로 선언한 뒤 userName과 id를 동일하게 해서 하나만 선택할 수 있도록 한다. -->
-				
+
 				<p class="p">E-mail</p>
-				<input type="email" placeholder="aa@aa.aa" id="userEmail" name="userEmail">
-				
+				<input type="email" placeholder="aa@aa.aa" id="userEmail"
+					name="userEmail" required>
+
 				<p class="p">전화번호</p>
-				<input type="tel" placeholder="010-1111-1111" id="userPhone" name="userPhone">
-				
+				<input type="tel" placeholder="010-1111-1111" id="userPhone"
+					name="userPhone" required>
+
 				<p class="p">
 					<input type="submit" value="제출" onclick="subCheck()">
 					<!-- 제출 버튼을 클릭 했을 때 위의 함수를 호출해서 모든 칸이 정확히 입력이 되어있는지 확인한다. -->
