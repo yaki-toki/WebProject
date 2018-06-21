@@ -7,16 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserDAO extends User{
+public class UserDAO extends User {
 
 	// 생성과 동시에 custom_num DB에 접근하여 num의 최대값을 가져온다.
 	private Connection conn;
 	// DB Connection객체 생성
 	private PreparedStatement pstmt;
-	
+
 	private Statement stm;
-	
+
 	private ResultSet rs;
+
 	// Data set을 저장할 객체 생성
 	public UserDAO() {
 
@@ -34,7 +35,7 @@ public class UserDAO extends User{
 			System.out.println(e.toString());
 		}
 	}
-	
+
 	public ResultSet SetUser(String userID) {
 		String SQL = "select * from member where userID=?";
 		try {
@@ -42,14 +43,14 @@ public class UserDAO extends User{
 			pstmt.setString(1, userID);
 			rs = pstmt.executeQuery();
 			rs.next();
-			//2~8 ID, PW, 이름, 나이, 성별, 이메일, 전화번호
-			
-		}catch(Exception e) {
+			// 2~8 ID, PW, 이름, 나이, 성별, 이메일, 전화번호
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return rs;
 	}
-	
+
 	public int IDChk(String userID) {
 		String SQL = "select * from member where userID=?";
 
@@ -79,7 +80,7 @@ public class UserDAO extends User{
 		return -1;// 데이터베이스 오류
 	}
 
-	public int join(User user){
+	public int join(User user) {
 		String SQL = "insert into member values(?,?,?,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(SQL);
@@ -94,7 +95,7 @@ public class UserDAO extends User{
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				if (rs != null)
 					rs.close();
@@ -106,25 +107,24 @@ public class UserDAO extends User{
 		}
 		return -1;// DB Error
 	}
-	
+
 	public int login(String userID, String userPassword) {
 		String SQL = "select userPassword from member where userID = ?";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				if(rs.getString(1).equals(userPassword)) {
-					return 1; //로그인 성공
+			if (rs.next()) {
+				if (rs.getString(1).equals(userPassword)) {
+					return 1; // 로그인 성공
 				}
+			} else {
+				return 0; // 비밀번호 오류
 			}
-			else {
-				return 0; //비밀번호 오류
-			}
-			return -1;//ID없음
-		}catch(Exception e) {
+			return -1;// ID없음
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				if (rs != null)
 					rs.close();
@@ -136,7 +136,7 @@ public class UserDAO extends User{
 		}
 		return -2; // DB오류
 	}
-	
+
 	public int UpdateUser(User user) {
 		String SQL = "update member set userPassword=?,userName=?,userAge=?,userGender=?, userEmail=?,userPhone=? where userID=?";
 		try {
@@ -151,7 +151,7 @@ public class UserDAO extends User{
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				if (rs != null)
 					rs.close();
@@ -162,5 +162,49 @@ public class UserDAO extends User{
 			}
 		}
 		return -1;// DB Error
+	}
+
+	public int DeleteUser(String userID) {
+		String SQL = "delete from member where userID= ?";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return -1;
+	}
+	
+	public ResultSet UserData(String userID) {
+		String SQL = "SELECT \r\n" + 
+				"    c.carNumber, m.userName, md.modelName, md.modelYear, md.modelMax, md.modelGear\r\n" + 
+				"FROM\r\n" + 
+				"    member AS m\r\n" + 
+				"        INNER JOIN\r\n" + 
+				"    car AS c\r\n" + 
+				"        INNER JOIN\r\n" + 
+				"    model AS md ON m.userID = c.userID\r\n" + 
+				"        AND c.modelID = md.modelID\r\n" + 
+				"WHERE\r\n" + 
+				"    m.userID = ?";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			return rs;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
