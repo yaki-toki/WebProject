@@ -10,12 +10,31 @@
 <body>
 
 	<%
-		String userID = (String)session.getAttribute("userID");
-		String modelID = request.getParameter("order_modelID");
-		String number = request.getParameter("carNumber1")+request.getParameter("carNumber2")+request.getParameter("carNumber3");
+		if (session.getAttribute("userID") == null) {
+			out.println("<script>");
+			out.println("alert('로그인 후 이용해 주세요')");
+			out.println("main.back()");
+			out.println("</script>");
+		} else {
+			String userID = (String) session.getAttribute("userID");
+			String modelID = request.getParameter("order_modelID");
+			String number = request.getParameter("carNumber1") + request.getParameter("carNumber2")
+					+ request.getParameter("carNumber3");
+			CarDAO cardao = new CarDAO();
+			if (cardao.InsertCar(number, userID, modelID) == -1) {
+				%>
+					<script>
+						alert("이미 존재하는 번호 입니다.")
+						history.back()
+					</script>
+				<%
+			} else {
+				%>
+					회원 등록에 성공하였습니다.
+				<%
+			}
+		}
 	%>
-	userID <%=userID %> <br>
-	modelID <%=modelID %> <br>
-	number <%=number %> <br>
+
 </body>
 </html>
