@@ -42,15 +42,14 @@
 		<!-- submit버튼을 누른 시점 이벤트 발생 반환된 값이 false인지 true인지에 따라 action수행 -->
 		아이디<input type="text" name="userID" id="userID"> 비밀번호<input
 			type="password" name="userPassword" id="userPassword"> <input
-			type="submit" value="로그인"> <input type="button" value="회원가입"
-			onclick="location.href = './main.jsp?pagefile=joinForm'">
+			type="submit" value="로그인"> 
+			<input type="button" value="회원가입" onclick="location.href = './main.jsp?pagefile=joinForm'">
 		<!-- 회원가입 버튼을 누른 경우 main으로 pagefile의 값을 join으로 저장해서 전달 -->
 	</form>
 	<%
 		} else {
 			//세션 값이 설정이 되어있는 경우
 	%>
-
 	<form action="./main.jsp?pagefile=updateForm" method="post">
 		<%=session.getAttribute("userID")%>님 로그인하셨습니다. <input type="hidden"
 			id="userID" name="userID" value="<%=session.getAttribute("userID")%>">
