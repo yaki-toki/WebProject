@@ -3,7 +3,8 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-<%@ page import="user.UserDAO"%>
+<%@ page import="user.Car"%>
+<%@ page import="user.CarDAO"%>
 <%@ page import="java.sql.*"%>
 <!-- 201403010 김지하 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,12 +12,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	
-</script>
 </head>
 <body>
-
+	<jsp:useBean id="car" class="user.Car" scope="request">
+		<jsp:setProperty name="car" property="*" />
+	</jsp:useBean>
 	<%
 		if (session.getAttribute("userID") == null) {
 			//세션이 설정되지 않은 경우
@@ -48,23 +48,26 @@
 					ResultSet rs = ps.executeQuery();
 		%>
 		<p>
-			Select Name : <select>
+			Select Name : <select id="listModel" name="listModel">
+				<option value=null>모델번호</option>
 				<%
 					while (rs.next()) {
-								String fname = rs.getString("modelID");
+								String modelID = rs.getString("modelID");
 				%>
-				<option value="<%=fname%>"><%=fname%></option>
+				<option value="<%=modelID%>"><%=modelID%></option>
 				<%
 					}
 				%>
 			</select>
 		</p>
+
 		<%
 			} catch (SQLException sqe) {
 					out.println(sqe);
 				}
 		%>
 		<p align="right">
+
 			<input type="submit" value="구매하기">
 	</form>
 	<%
