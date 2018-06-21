@@ -32,12 +32,14 @@
 			int result = userDAO.UpdateUser(user);
 			// User에 저장된 값들을 인자값으로 설정해서 전달
 			if (result == -1) {
+				// 수정 실패
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
 				script.println("alert('수정에 실패하였습니다.')");
 				script.println("history.back()");
 				script.println("</script>");
 			} else {
+				// 수정 성공
 				session.setAttribute("userID", user.getUserID());
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
