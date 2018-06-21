@@ -35,6 +35,7 @@ a:hover {
 }
 
 </style>
+<script src="script.js"></script>
 <body>
 	<%
 		String pagefile = request.getParameter("pagefile");
