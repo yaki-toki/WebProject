@@ -25,13 +25,14 @@ th, td {
 	text-align: center;
 	width: 350px;
 }
-
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
+	<jsp:useBean id="car" class="user.Car" scope="request">
+		<jsp:setProperty name="car" property="*" />
+	</jsp:useBean>
 	<%
 		if (session.getAttribute("userID") == null) {
 			out.println("<script>");
@@ -40,10 +41,8 @@ th, td {
 			out.println("</script>");
 		} else {
 	%>
-	<form action="main.jsp?pagefile=order_result" method="post">
-		<jsp:useBean id="car" class="user.Car" scope="request">
-			<jsp:setProperty name="car" property="*" />
-		</jsp:useBean>
+	<form action="main.jsp?pagefile=order_result" method="post" class = "order-form">
+
 		<%
 			String modelID = request.getParameter("listModel");
 				if (modelID == null) {
@@ -53,7 +52,10 @@ th, td {
 					out.println("</script>");
 				} else {
 					CarDAO dao = new CarDAO();
+					//CarDAO에서 실행시킨 rs를 반환받는다.
 					ResultSet rs = dao.SetModel(modelID);
+					
+					//반환받은 데이터를  Car에 저장한다.
 					car.setModelID(rs.getString(1));
 					car.setManufacturer(rs.getString(2));
 					car.setModelName(rs.getString(3));
@@ -67,6 +69,7 @@ th, td {
 					car.setModelDriving(rs.getString(11));
 					car.setModelFuel(rs.getString(12));
 		%>
+		<!-- 위에서 저장한 데이터들을 불러온다. -->
 		<div id="sidebar">
 			<table>
 				<tr>
@@ -119,21 +122,30 @@ th, td {
 				</tr>
 			</table>
 		</div>
+		
+		<!-- 사진이 나오는 부분 -->
 		<div id="aside">
-		</div>
-		<br><br>
-		<input type="hidden" id="order_modelID" name="order_modelID" value="<%=modelID %>">
+			<p align="center">
+				<img src="img/<%=modelID%>.jpg">
+		</div> <br>
+		
+		<!-- 선택한 모델ID를 넘기기 위해서 hidden을 써서 값을 저장한다.-->
+		<input type="hidden" id="order_modelID" name="order_modelID" value="<%=modelID%>">
 		<div id="footer">
-			<br> <input type="text" id="carNumber1" name="carNumber1" maxlength="2"
-				required> <select id="carNumber2" name="carNumber2">
+		<!-- 차량 번호 입력 부분 -->
+			<br> 차량 번호 : <input type="text" id="carNumber1"
+				name="carNumber1" maxlength="2" required> <select
+				id="carNumber2" name="carNumber2">
 				<option value="가">가</option>
 				<option value="나">나</option>
 				<option value="다">다</option>
 				<option value="라">라</option>
 				<option value="마">마</option>
-			</select> <input type="number" id="carNumber3" name="carNumber3" maxlength="4" required>
-			<br> <br> <input type="submit" value="등록하기"> <input
-				type="button" value="뒤로가기" onclick="history.back()">
+			</select> <input type="text" id="carNumber3" name="carNumber3" maxlength="4"
+				required> <br> <br>
+			<p align="right">
+				<input type="submit" value="등록하기"> <input type="button"
+					value="뒤로가기" onclick="history.back()">
 		</div>
 	</form>
 	<%
