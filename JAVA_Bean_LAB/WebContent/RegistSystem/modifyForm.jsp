@@ -32,8 +32,8 @@
 				</tr>
 				<tr>
 					<td>비밀번호</td>
-					<td><input id="passwd" name="passwd" type="password"
-						size="20" maxlength="16"></td>
+					<td><input id="passwd" name="passwd" type="password" size="20"
+						maxlength="16"></td>
 				</tr>
 				<tr>
 					<td>이름</td>
@@ -54,9 +54,9 @@
 "></td>
 				</tr>
 				<tr>
-					<td colspan="2" align=center><input type="submit"
-						value="수정
-"> <inputtype
+					<td colspan="2" align=center><input type="submit" value="수정
+">
+						<inputtype
 							="button" onclick="javascript:location.href='loginForm.jsp;"
 							value="취소"></td>
 				</tr>
