@@ -48,16 +48,16 @@ public class CarDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return rs;
+		return null;
 	}
 
-	public int InsertCar(String number, User user, Car car) {
+	public int InsertCar(String number, String user, String car) {
 		String SQL = "insert into car values(?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, number);
-			pstmt.setString(2, user.getUserID());
-			pstmt.setString(3, car.getModelID());
+			pstmt.setString(2, user);
+			pstmt.setString(3, car);
 			return pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -72,5 +72,69 @@ public class CarDAO {
 			}
 		}
 		return -1;// DB Error
+	}
+
+	public String SearchNumber(String userID) {
+		String SQL = "select carNumber from car where userID = ?";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			rs.next();
+			return rs.getString(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	public int DeleteNumber(String userID) {
+		String SQL = "delete from car where userID= ?";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return -1;
+		
+	}public int DeleteCar(String carNumber) {
+		String SQL = "delete from car where carNumber= ?";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, carNumber);
+			return pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return -1;
 	}
 }
