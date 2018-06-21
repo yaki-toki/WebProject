@@ -14,19 +14,15 @@ function checkFilled(obj) {
 	}
 }
 
-
-function agechk(obj) {
+// 나이 체크
+function agechk(obj1) {
 	var txt = document.getElementById("age_chk");
 	txt.innerHTML = "";
-	if (obj.value == "") {
-		// id값이 비어있는 경우
+	if (obj1.value < 19) {
 		txt.innerHTML = "*만 19세 이상만 가입 가능합니다.";
-		// 값을 입력해 달라는 문구 출력
-		obj.focus();
-		// 포거스를 다시 잡아준다.
+		obj1.focus();
 	} else {
 		txt.innerHTML = "";
-		// 비어있지 않는 경우 공백으로 표시
 	}
 }
 
@@ -110,4 +106,3 @@ function subCheck() {
 		}
 	}
 }
-
