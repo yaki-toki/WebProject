@@ -64,7 +64,6 @@
 				}
 		%>
 		<p align="right">
-
 			<input type="submit" value="구매하기">
 	</form>
 	<%
