@@ -24,10 +24,9 @@
 
 	<%
 		} else {
-			//세션이 설정 되어있는 경우 구매 열을 출력
 	%>
 	<h1>
-		<strong>상품정보</strong>
+		<strong>차량 정보</strong>
 	</h1>
 	<form action="./main.jsp?pagefile=order" method="post">
 		<%!String driverName = "com.mysql.jdbc.Driver";%>
@@ -45,6 +44,7 @@
 					ResultSet rs = ps.executeQuery();
 		%>
 		<p>
+		<!-- 저장되어있는 modelID를 select의 option으로 생성 -->
 			Select Name : <select id="listModel" name="listModel">
 				<option value=null>모델번호</option>
 				<%

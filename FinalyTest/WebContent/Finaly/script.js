@@ -15,6 +15,7 @@ function checkFilled(obj) {
 }
 
 // 나이 체크
+// 아직 되지 않음...
 function agechk(obj1) {
 	var txt = document.getElementById("age_chk");
 	txt.innerHTML = "";

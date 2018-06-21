@@ -36,6 +36,7 @@ public class UserDAO extends User {
 		}
 	}
 
+	// 회원 정보를 불러오기 위한 부분
 	public ResultSet SetUser(String userID) {
 		String SQL = "select * from member where userID=?";
 		try {
@@ -44,13 +45,14 @@ public class UserDAO extends User {
 			rs = pstmt.executeQuery();
 			rs.next();
 			// 2~8 ID, PW, 이름, 나이, 성별, 이메일, 전화번호
-
+			return rs;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return rs;
+		return null;
 	}
 
+	// ID중복을 방지하기 위한 부분
 	public int IDChk(String userID) {
 		String SQL = "select * from member where userID=?";
 
@@ -80,6 +82,7 @@ public class UserDAO extends User {
 		return -1;// 데이터베이스 오류
 	}
 
+	// 회원 가입 시에 정보를 저장하는 부분
 	public int join(User user) {
 		String SQL = "insert into member values(?,?,?,?,?,?,?,?)";
 		try {
@@ -108,6 +111,7 @@ public class UserDAO extends User {
 		return -1;// DB Error
 	}
 
+	// 로그인 조건을 판단하기 위한 부분
 	public int login(String userID, String userPassword) {
 		String SQL = "select userPassword from member where userID = ?";
 		try {
@@ -137,6 +141,7 @@ public class UserDAO extends User {
 		return -2; // DB오류
 	}
 
+	//회원 정보를 수정하는 부분
 	public int UpdateUser(User user) {
 		String SQL = "update member set userPassword=?,userName=?,userAge=?,userGender=?, userEmail=?,userPhone=? where userID=?";
 		try {
@@ -164,6 +169,7 @@ public class UserDAO extends User {
 		return -1;// DB Error
 	}
 
+	// member에 userID로 데이터를 삭제하는 부분
 	public int DeleteUser(String userID) {
 		String SQL = "delete from member where userID= ?";
 		try {
@@ -185,6 +191,7 @@ public class UserDAO extends User {
 		return -1;
 	}
 	
+	// 회원 정보에서 회원에게 등록된 차량의 정보를 불러오는 join쿼리문
 	public ResultSet UserData(String userID) {
 		String SQL = "SELECT \r\n" + 
 				"    c.carNumber, m.userName, md.modelName, md.modelYear, md.modelMax, md.modelGear\r\n" + 

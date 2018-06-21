@@ -49,11 +49,13 @@
 	border: 1px solid #bcbcbc;
 }
 
+/* aside에서 이미지를 입력한 경우 이미지의 크기 설정  */
 #aside img {
 	width: 389px;
 	height: auto;
 }
 
+/* 기본적인 session의 크기와 틀 설정 */
 #session{
 	clear: both;
 	padding: 20px;
@@ -66,6 +68,7 @@
 	border: 1px solid #bcbcbc;
 }
 
+/* 테이블의 td에 입력되는 문자는 가운데 정렬 */
 td {
 	text-align: center;
 }

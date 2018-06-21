@@ -2,6 +2,7 @@ package user;
 
 import java.sql.Timestamp;
 
+// 회원 등록 혹은 정보를 불러올 때 데이터를 담고있는 파일
 public class User {
 	private String userID;
 	private String userPassword;

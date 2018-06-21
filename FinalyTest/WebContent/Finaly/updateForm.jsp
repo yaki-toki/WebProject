@@ -63,32 +63,34 @@
 					<td><label id="label">Gender</label></td>
 					<td>
 						<%
+							// 저장된 정보가 남성인 경우 라디오 버튼을 남자로 설정한다.
 							if (user.getUserGender().equals("Male")) {
-						%> <input type="radio" id="userGender" name="userGender"
-						value="Female"> 여자 <input type="radio" id="userGender"
-						name="userGender" value="Male" checked> 남자 <%
+							%> 
+								<input type="radio" id="userGender" name="userGender" value="Female"> 여자 
+								<input type="radio" id="userGender" name="userGender" value="Male" checked> 남자 
+							<%
 						 	} else {
-						%> <input type="radio" id="userGender" name="userGender" value="Female" checked> 여자 
-						<input type="radio" id="userGender" name="userGender" value="Male">남자 
-						<%
+						 	// 저장된 정보가 여자인 경우 여자에 설정 시킨다.
+							%> 
+								<input type="radio" id="userGender" name="userGender" value="Female" checked> 여자 
+								<input type="radio" id="userGender" name="userGender" value="Male">남자 
+							<%
 						 	}
 						%>
 					</td>
 				</tr>
 				<tr>
 					<td><label id="label">E-mail</label></td>
-					<td><input type="email" id="userEmail" name="userEmail"
-						value="<%=user.getUserEmail()%>"></td>
+					<td><input type="email" id="userEmail" name="userEmail" value="<%=user.getUserEmail()%>"></td>
 				</tr>
 				<tr>
 					<td><label id="label">Phone</label></td>
-					<td><input type="tel" id="userPhone" name="userPhone"
-						value="<%=user.getUserPhone()%>"></td>
+					<td><input type="tel" id="userPhone" name="userPhone" value="<%=user.getUserPhone()%>"></td>
 				</tr>
 			</table>
 			
-			<input type="submit" value="정보수정"> <input type="button"
-				value="회원탈퇴" onclick="location.href='delet_pro.jsp'">
+			<input type="submit" value="정보수정"> 
+			<input type="button" value="회원탈퇴" onclick="location.href='delete_pro.jsp'">
 		</div>
 		<br>
 		<%
@@ -101,6 +103,7 @@
 		<%
 			} else {
 		%>
+		<!-- 해당 회원에 차량이 등록 되어있는 경우 -->
 		<div id="session">
 			<table>
 				<thead>
@@ -114,6 +117,7 @@
 					</tr>
 				</thead>
 				<%
+					// join쿼리문이 출력되는 부분
 					rs = dao.UserData(user.getUserID());
 							while (rs.next()) {
 								out.print("<tr>");

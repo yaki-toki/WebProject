@@ -12,6 +12,7 @@
 	<div>
 		<%
 			if (session.getAttribute("userID") == null) {
+			// join은 세션이 설정되어 있지 않은 상태에서만 가능함
 		%>
 		<fieldset style="width: 700px; margin: 0 auto;">
 			<h1>회원가입</h1>
@@ -83,7 +84,7 @@
 		</fieldset>
 		<%
 			}
-			//세션이 설정되지 않은 경우
+			//세션이 설정되어 있는 경우
 			else {
 				out.println("<script>");
 				out.println("alert('로그아웃 후 이용해 주세요')");

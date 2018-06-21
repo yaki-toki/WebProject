@@ -16,15 +16,17 @@
 			out.println("</script>");
 		} else {
 	%>
+	<!-- 해당 회원에게 등록된 차량 번호를 불러오는 부분 -->
 	<form action="./main.jsp?pagefile=CarDelete_pro" method="post">
 		<%!String driverName = "com.mysql.jdbc.Driver";%>
 		<%!String url = "jdbc:mysql://203.255.177.208:3306/test12";%>
 		<%!String user = "test12";%>
 		<%!String psw = "test1234";%>
 		<%
-			String userID = (String) session.getAttribute("userID");
-				Connection con = null;
+				String userID = (String) session.getAttribute("userID");
+			 	Connection con = null;
 				PreparedStatement ps = null;
+				
 				try {
 					Class.forName(driverName);
 					con = DriverManager.getConnection(url, user, psw);
@@ -37,8 +39,10 @@
 				<option value=null>차량번호</option>
 				<%
 					while (rs.next()) {
-								String carNumber = rs.getString("carNumber");
+							// 해당 ID에 등록된 차량 번호를 모두 출력시킴
+							String carNumber = rs.getString("carNumber");
 				%>
+				<!-- 차량 번호를 while문을 반복 하면서 option을 생성 -->
 				<option value="<%=carNumber%>"><%=carNumber%></option>
 				<%
 					}
@@ -51,7 +55,8 @@
 				}
 		%>
 		<p align="right">
-			<input type="submit" value="등록취소">
+			<input type="submit" value="등록해제">
+			<input type="button" value="취소" onclick="location.href='main.jsp'">
 	</form>
 	<%
 		}

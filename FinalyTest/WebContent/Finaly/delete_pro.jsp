@@ -19,13 +19,20 @@
 			CarDAO cardao = new CarDAO();
 			UserDAO userdao = new UserDAO();
 			String CarNumber = cardao.SearchNumber(userID);
-
+			
+			/*
+				차량 번호가 등록이 되어있는 경우 member테이블과 car테이블이 연동되어 있기 때문에
+				car테이블에 연결된 정보를 먼저 삭제한 후 member테이블에서 정보를 지워야 한다.
+			*/
 			if (CarNumber != null) {
+				// 차량 번호가 존재하는 경우
+				// car테이블 에서 먼저 삭제
 				if (cardao.DeleteNumber(userID) == -1) {
 					out.println("<script>");
 					out.println("alert('DB오류1')");
 					out.println("</script>");
 				} else {
+					// 그 다음 member테이블에서 삭제
 					if (userdao.DeleteUser(userID) == -1) {
 						out.println("<script>");
 						out.println("alert('DB오류2')");
@@ -38,6 +45,7 @@
 					}
 				}
 			} else {
+				// 차량 번호가 등록되어있지 않은 경우 member테이블 에서만 삭제한다.
 				if (userdao.DeleteUser(userID) == -1) {
 					out.println("<script>");
 					out.println("alert('DB오류3')");

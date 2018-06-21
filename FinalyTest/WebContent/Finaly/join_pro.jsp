@@ -19,7 +19,8 @@
 			user.setReg_date(new Timestamp(System.currentTimeMillis()));
 			String userID = null;
 			if (session.getAttribute("userID") != null) {
-				userID = (String) session.getAttribute("userID");
+				userID = (String)session.getAttribute("userID");
+				// 세션이 설정 된 경우 userID의 값을 해당 세션의 id값으로 설정
 			}
 			if (user.getUserID() == null || user.getUserPassword() == null || user.getUserName() == null
 					|| user.getUserAge() == 0 || user.getUserGender() == null || user.getUserEmail() == null
@@ -28,22 +29,21 @@
 				out.println("alert('입력이 안 된 사항이 있습니다.')");
 				out.println("history.back()");
 				out.println("</script>");
-				System.out.println(user.getUserID());
-				System.out.println(user.getUserPassword());
-				System.out.println(user.getUserName());
-				System.out.println(user.getUserAge());
-				System.out.println(user.getUserGender());
-				System.out.println(user.getUserEmail());
-				System.out.println(user.getUserPhone());
+				// 입력이 안되있는 항목이 있는 경우
+				
 			} else {
 				UserDAO userDAO = new UserDAO();
 				int result = userDAO.join(user);
+				// join부분을 실행시켜서 값을 반환 받는다.
+				
 				if (result == -1) {
+					// join실패
 					out.println("<script>");
 					out.println("alert('이미 존재하는 ID입니다.')");
 					out.println("history.back()");
 					out.println("</script>");
 				} else {
+					// join성공시 세션을 자동으로 설정
 					session.setAttribute("userID", user.getUserID());
 					out.println("<script>");
 					out.println("location.href = 'main.jsp'");
@@ -53,6 +53,7 @@
 	%>
 	<%
 		}else{
+			// 로그인이 되어있는 경우는 join을 할 수 없음
 			out.println("<script>");
 			out.println("alert('로그아웃 후 이용해 주세요.')");
 			out.println("main.back()");

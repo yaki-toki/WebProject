@@ -30,6 +30,7 @@
 	<%
 		UserDAO userDAO = new UserDAO();
 			int result = userDAO.UpdateUser(user);
+			// User에 저장된 값들을 인자값으로 설정해서 전달
 			if (result == -1) {
 				PrintWriter script = response.getWriter();
 				script.println("<script>");

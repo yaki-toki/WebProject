@@ -12,6 +12,7 @@
 
 </head>
 <body>
+	<!-- footer의 copyright부분  -->
 	copyright by Underground
 	<br>
 	<h6>201403010 김지하</h6>

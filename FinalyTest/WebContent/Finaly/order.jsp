@@ -133,19 +133,25 @@ th, td {
 		<input type="hidden" id="order_modelID" name="order_modelID" value="<%=modelID%>">
 		<div id="footer">
 		<!-- 차량 번호 입력 부분 -->
-			<br> 차량 번호 : <input type="text" id="carNumber1"
-				name="carNumber1" maxlength="2" required> <select
-				id="carNumber2" name="carNumber2">
+			<br> 차량 번호 : <input type="text" id="carNumber1" name="carNumber1" maxlength="2" required> 
+			<!-- 차량 번호 앞의 두 수 -->
+			
+			<select id="carNumber2" name="carNumber2">
 				<option value="가">가</option>
 				<option value="나">나</option>
 				<option value="다">다</option>
 				<option value="라">라</option>
 				<option value="마">마</option>
-			</select> <input type="text" id="carNumber3" name="carNumber3" maxlength="4"
-				required> <br> <br>
+			</select> 
+			<!-- 차량의 한글 부분 아직 가~마 밖에 안만들었습니다. -->
+			
+			<input type="text" id="carNumber3" name="carNumber3" maxlength="4" required> 
+			<!-- 차량 뒤의 4수 -->
+			
+			<br><br>
 			<p align="right">
-				<input type="submit" value="등록하기"> <input type="button"
-					value="뒤로가기" onclick="history.back()">
+				<input type="submit" value="등록하기"> 
+				<input type="button" value="뒤로가기" onclick="history.back()">
 		</div>
 	</form>
 	<%

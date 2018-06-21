@@ -56,15 +56,12 @@ a:hover {
 		</div>
 		<!-- header 끝  -->
 
-
 		<!--  content 시작  -->
 		<div id="content">
 			<jsp:include page='<%=pagefile + ".jsp"%>' />
 			<!-- main페이지에서 받아온 pagefile를 표현식을 사용해서 입력 해 준다. -->
 		</div>
 		<!--  content 끝  -->
-
-
 
 		<!--  footer 시작   -->
 		<div id="footer">

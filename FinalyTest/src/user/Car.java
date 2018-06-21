@@ -1,5 +1,6 @@
 package user;
 
+// 차량 정보를 담을 bean파일
 public class Car {
 	private String modelID;
 	private String manufacturer;
@@ -17,7 +18,6 @@ public class Car {
 	public Car() {
 		modelID=null;
 	}
-	
 	public String getModelID() {
 		return modelID;
 	}

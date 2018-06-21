@@ -12,14 +12,12 @@ public class CarDAO {
 	private Connection conn;
 	// DB Connection객체 생성
 	private PreparedStatement pstmt;
-
 	private Statement stm;
-
 	private ResultSet rs;
-
-	// Data set을 저장할 객체 생성
+	// DataSet을 저장할 객체 생성
+	
+	// 클래스 생성과 동시에 실행
 	public CarDAO() {
-
 		try {
 			String DB_URL = "jdbc:mysql://203.255.177.208:3306/test12?useUnicode=true&characterEncoding=utf8";
 			String DB_USER = "test12";
@@ -50,7 +48,8 @@ public class CarDAO {
 		}
 		return null;
 	}
-
+	
+	// 차량 등록 시에 정보를 저장하는 부분
 	public int InsertCar(String number, String user, String car) {
 		String SQL = "insert into car values(?,?,?)";
 		try {
@@ -59,6 +58,7 @@ public class CarDAO {
 			pstmt.setString(2, user);
 			pstmt.setString(3, car);
 			return pstmt.executeUpdate();
+			// return을 pstmt.executeUpdate()가 값을 반환하는 값은 정수이기 때문
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -74,6 +74,7 @@ public class CarDAO {
 		return -1;// DB Error
 	}
 
+	// 등록된 차량이 있는지 검사하기 위한 부분
 	public String SearchNumber(String userID) {
 		String SQL = "select carNumber from car where userID = ?";
 		try {
@@ -97,6 +98,8 @@ public class CarDAO {
 		return null;
 	}
 
+	// 차량 번호로 데이터 삭제
+	// delete_pro에서 탈퇴한 사용자가  등록한 데이터를 모두 삭제
 	public int DeleteNumber(String userID) {
 		String SQL = "delete from car where userID= ?";
 		try {
@@ -115,9 +118,12 @@ public class CarDAO {
 				e.printStackTrace();
 			}
 		}
-		return -1;
-		
-	}public int DeleteCar(String carNumber) {
+		return -1;	
+	}
+	
+	// 차량 번호로 데이터 삭제
+	// CarDelete_pro에서 사용 특정 차량만을 삭제하기 위한 부분
+	public int DeleteCar(String carNumber) {
 		String SQL = "delete from car where carNumber= ?";
 		try {
 			pstmt = conn.prepareStatement(SQL);
