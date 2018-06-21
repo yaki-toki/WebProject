@@ -137,27 +137,6 @@ public class UserDAO extends User{
 		return -2; // DB오류
 	}
 	
-	public ResultSet Car() {
-		String SQL = "SELECT * FROM car";
-		try {
-			stm = conn.createStatement();
-			rs = stm.executeQuery(SQL);
-			return rs;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return rs;
-		}finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
 	public int UpdateUser(User user) {
 		String SQL = "update member set userPassword=?,userName=?,userAge=?,userGender=?, userEmail=?,userPhone=? where userID=?";
 		try {
