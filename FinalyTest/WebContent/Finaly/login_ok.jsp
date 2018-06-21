@@ -17,7 +17,6 @@
 	<jsp:useBean id="user" class="user.User" scope="page" />
 	<jsp:setProperty name="user" property="userID" />
 	<jsp:setProperty name="user" property="userPassword" />
-	<!-- 로그인은 ID와 Password만 필요하므로 두 값만 가져온다. -->
 	<%
 		UserDAO userDAO = new UserDAO();
 		int result = userDAO.login(user.getUserID(), user.getUserPassword());
