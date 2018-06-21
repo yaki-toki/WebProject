@@ -214,4 +214,24 @@ public class UserDAO extends User {
 		}
 		return null;
 	}
+	public ResultSet SearchData(String userID) {
+		String SQL = "SELECT \r\n" + 
+				"    c.carNumber, m.userName, m.userPhone\r\n" + 
+				"FROM\r\n" + 
+				"    car AS c\r\n" + 
+				"        INNER JOIN\r\n" + 
+				"    member AS m\r\n" + 
+				"WHERE\r\n" + 
+				"    c.carNumber = ?\r\n" + 
+				"        AND c.userID = m.userID";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, userID);
+			rs = pstmt.executeQuery();
+			return rs;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;//정보 없음
+	}
 }

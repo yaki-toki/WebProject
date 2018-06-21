@@ -51,6 +51,11 @@ a:hover {
 		<div id="headermenu">
 			<a href="main.jsp">홈</a> | <a href="./main.jsp?pagefile=list"> 상품
 				보기 </a>
+				<%
+					if(session.getAttribute("userID") != null){
+						out.print(" | <a href='./main.jsp?pagefile=search'>회원 검색</a>");
+					}
+				%>
 			<!-- 홈을 누르면 main화면으로 가서 pagefile이 intro로 선언된다.
 			상품 보기를 누르면 pagefile에 list로 값이 선언된다. -->
 		</div>
