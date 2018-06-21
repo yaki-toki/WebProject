@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%
+	pageEncoding="UTF-8"%>
+<%
 	request.setCharacterEncoding("UTF-8");
 %>
 <!-- 201403010 김지하 -->
@@ -12,7 +12,8 @@
 
 </head>
 <body>
-copyright by Underground<br>
-<h6>201403010 김지하</h6>
+	copyright by Underground
+	<br>
+	<h6>201403010 김지하</h6>
 </body>
 </html>
