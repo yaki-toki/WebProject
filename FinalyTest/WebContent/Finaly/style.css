@@ -34,7 +34,15 @@
 }
 
 #sidebar {
-	width: 260px;
+	width: 400px;
+	padding: 20px;
+	margin-bottom: 20px;
+	float: left;
+	border: 1px solid #bcbcbc;
+}
+
+#aside {
+	width: 400px;
 	padding: 20px;
 	margin-bottom: 20px;
 	float: left;
@@ -45,4 +53,9 @@
 	clear: both;
 	padding: 20px;
 	border: 1px solid #bcbcbc;
+}
+
+td {
+	style ="text-align: center;
+	"
 }
