@@ -14,9 +14,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:useBean id="car" class="user.Car" scope="request">
-		<jsp:setProperty name="car" property="*" />
-	</jsp:useBean>
 	<%
 		if (session.getAttribute("userID") == null) {
 			//세션이 설정되지 않은 경우
