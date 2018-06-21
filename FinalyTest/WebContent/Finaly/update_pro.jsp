@@ -14,6 +14,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%
+		if ((session.getAttribute("userID") == null)) {
+			out.println("<script>");
+			out.println("alert('로그인을 먼저 해주세요.')");
+			out.println("location.href='main.jsp'");
+			out.println("</script>");
+		} else {
+	%>
 	<jsp:useBean id="user" class="user.User">
 		<jsp:setProperty name="user" property="*" />
 		<!-- beans페키지 내에 있는 Information파일을 불러온다. -->
@@ -21,20 +29,23 @@
 	</jsp:useBean>
 	<%
 		UserDAO userDAO = new UserDAO();
-		int result = userDAO.UpdateUser(user);
-		if (result == -1) {
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("alert('수정에 실패하였습니다.')");
-			script.println("history.back()");
-			script.println("</script>");
-		} else {
-			session.setAttribute("userID", user.getUserID());
-			PrintWriter script = response.getWriter();
-			script.println("<script>");
-			script.println("location.href = 'main.jsp'");
-			script.println("</script>");
+			int result = userDAO.UpdateUser(user);
+			if (result == -1) {
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('수정에 실패하였습니다.')");
+				script.println("history.back()");
+				script.println("</script>");
+			} else {
+				session.setAttribute("userID", user.getUserID());
+				PrintWriter script = response.getWriter();
+				script.println("<script>");
+				script.println("alert('수정이 완료 되었습니다.')");
+				script.println("location.href = 'main.jsp'");
+				script.println("</script>");
+			}
 		}
 	%>
+
 </body>
 </html>

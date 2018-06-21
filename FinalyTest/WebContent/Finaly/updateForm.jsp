@@ -10,6 +10,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%
+		if ((session.getAttribute("userID") == null)) {
+			out.println("<script>");
+			out.println("alert('로그인을 먼저 해주세요.')");
+			out.println("location.href='main.jsp'");
+			out.println("</script>");
+		} else {
+	%>
 	<jsp:useBean id="user" class="user.User">
 		<jsp:setProperty name="user" property="*" />
 		<!-- beans페키지 내에 있는 Information파일을 불러온다. -->
@@ -19,25 +27,26 @@
 	ResultSet rs = null;%>
 	<%
 		rs = dao.SetUser(user.getUserID());
-		user.setUserID(rs.getString(1));
-		user.setUserPassword(rs.getString(2));
-		user.setUserName(rs.getString(3));
-		user.setUserAge(rs.getInt(4));
-		user.setUserGender(rs.getString(5));
-		user.setUserEmail(rs.getString(6));
-		user.setUserPhone(rs.getString(7));
+			user.setUserID(rs.getString(1));
+			user.setUserPassword(rs.getString(2));
+			user.setUserName(rs.getString(3));
+			user.setUserAge(rs.getInt(4));
+			user.setUserGender(rs.getString(5));
+			user.setUserEmail(rs.getString(6));
+			user.setUserPhone(rs.getString(7));
 	%>
 	<form action="update_pro.jsp" method="post">
 		<div id="container">
 			<label id="label">ID</label> <input type="text" id="userID"
-				name="userID" value="<%=user.getUserID()%>"><br> <label
-				id="label">Password</label> <input type="text" id="userPassword"
-				name="userPassword" value="<%=user.getUserPassword()%>"><br>
-			<label id="label">Name</label> <input type="text" id="userName"
-				name="userName" value="<%=user.getUserName()%>"><br>
-			<label id="label">Age</label> <input type="text" id="userAge"
-				name="userAge" value="<%=user.getUserAge()%>"><br>
-			<label id="label">Gender</label>
+				name="userID" value="<%=user.getUserID()%>" readonly><br>
+			<label id="label">Password</label> <input type="text"
+				id="userPassword" name="userPassword"
+				value="<%=user.getUserPassword()%>"><br> <label
+				id="label">Name</label> <input type="text" id="userName"
+				name="userName" value="<%=user.getUserName()%>"><br> <label
+				id="label">Age</label> <input type="text" id="userAge"
+				name="userAge" value="<%=user.getUserAge()%>"><br> <label
+				id="label">Gender</label>
 			<div>
 				<%
 					if (user.getUserGender().equals("Male")) {
@@ -62,5 +71,8 @@
 		</div>
 		<input type="submit" value="정보수정">
 	</form>
+	<%
+		}
+	%>
 </body>
 </html>
