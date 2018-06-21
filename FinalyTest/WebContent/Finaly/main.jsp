@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>0
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -17,7 +17,6 @@
 		//template페이지에서 값을 받아온다.
 		
 		if (pagefile == null) {
-			
 			pagefile = "intro";
 			//받아온 pagefile라는 변수의 값이 null인 경우 intro를 저장한다.
 		}
