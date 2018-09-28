@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <sql:setDataSource
-	url="jdbc:mysql://localhost:3306/DB?useUnicode=true&characterEncoding=EUC_KR"
+	url="jdbc:mysql://localhost:3306/test12?useUnicode=true&characterEncoding=EUC_KR"
 	driver="org.gjt.mm.mysql.Driver" user="user" password="password"
-	var="db" scope="application" />
+	var="db" scope="application"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
