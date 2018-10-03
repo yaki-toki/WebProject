@@ -49,28 +49,27 @@ html, body {
 	margin: 5px;
 }
 
-.imglogo{
-	width:200px;
+.imglogo {
+	width: 200px;
 	height: 95px;
-	margin:10px;
 }
 
-.loginTable{
+.loginTable {
 	width: 245px;
-	text-align:left;
+	text-align: left;
 }
 
 .buttonLogin {
 	background-color: #4CAF50;
 	border: none;
 	color: white;
-	width:240px;
+	width: 240px;
 	height: 30px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
 	font-size: 11px;
-	margin:5px;
+	margin: 5px;
 	cursor: pointer;
 	float: center;
 }

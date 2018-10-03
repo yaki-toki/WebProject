@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="header">
-		<img class="imglogo" src="img/kimyaki.png">
+		<c:import url="headerMenu.jsp" />
 	</div>
 	
 	<div class = "nav">
@@ -22,7 +22,7 @@
 	</div>
 	
 	<div class="aside">
-		<c:if test="${flag == 1}">
+		<c:if test="${flag ==1}">
 			<c:out value="${userid }" />
 			<br />
 			<c:out value="${userpassword }" />
@@ -32,7 +32,7 @@
 			</form>
 		</c:if>
 
-		<c:if test="${flag == 2 || flag==null}">
+		<c:if test="${flag==null}">
 			<c:import url="loginForm.jsp" />
 		</c:if>
 	</div>
