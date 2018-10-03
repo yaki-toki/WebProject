@@ -1,0 +1,76 @@
+@charset "EUC-KR";
+
+html, body {
+	margin: auto;
+	padding: 5px;
+	height: 85%;
+	width: 1500px;
+}
+
+.header {
+	width: 1475px;
+	height: 20%;
+	border: 1px solid;
+	margin: 5px;
+}
+
+.nav {
+	width: 200px;
+	height: 70%;
+	float: left;
+	border: 1px solid;
+	margin: 5px;
+	margin-bottom: 10px;
+}
+
+.section {
+	width: 1000px;
+	height: 70%;
+	float: left;
+	border: 1px solid;
+	margin: 5px;
+	margin-bottom: 10px;
+}
+
+.aside {
+	width: 250px;
+	height: 70%;
+	float: left;
+	border: 1px solid;
+	margin: 5px;
+	margin-bottom: 10px;
+}
+
+.footer {
+	width: 1475px;
+	height: 10%;
+	clear: both;
+	border: 1px solid;
+	margin: 5px;
+}
+
+.imglogo{
+	width:200px;
+	height: 95px;
+	margin:10px;
+}
+
+.loginTable{
+	width: 245px;
+	text-align:left;
+}
+
+.buttonLogin {
+	background-color: #4CAF50;
+	border: none;
+	color: white;
+	width:240px;
+	height: 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 11px;
+	margin:5px;
+	cursor: pointer;
+	float: center;
+}
