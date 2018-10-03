@@ -11,8 +11,9 @@
 </head>
 <body>
 	<c:remove var="pagefile" />
-	<c:remove var="userID" />
-	<c:remove var="userPassword" />
+	<c:remove var="userid" />
+	<c:remove var="userpassword" />
+	<c:remove var="flag"/>
 	<c:redirect url="index.jsp" />
 </body>
 </html>
