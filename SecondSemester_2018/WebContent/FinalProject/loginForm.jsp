@@ -9,13 +9,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
-<body>
-로그인 Form
-	<form action="login_ok.jsp" method="post">
-		아이디 : <input type="text" name="userID" /><br /> 
-		비밀번호 : <input type="password" name="userPassword" /><br />
-		
-		<input type="submit" value="로그인">
-	</form>
-</body>
+<form action="login_ok.jsp" method="post">
+	로그인 Form <br>
+	<div class="loginTable">
+		<table>
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" name="userID" /></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type="password" name="userPassword" /></td>
+			</tr>
+		</table>
+	</div>
+	<input type="submit" value="로그인" class="buttonLogin">
+</form>
 </html>
