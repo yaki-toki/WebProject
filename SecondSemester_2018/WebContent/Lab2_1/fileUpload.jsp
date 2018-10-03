@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR" import="com.oreilly.servlet.MultipartRequest"
-	import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"
-	import="java.util.*"%>
+	pageEncoding="EUC-KR"%>
+<%@ page import="com.oreilly.servlet.MultipartRequest"%>
+<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@ page import="java.util.*"%>
 <%
-	String uploadPath = application.getRealPath("upload");
+	//소스코드가 위치하는 폴더 (WebContent)에 upload 폴더를 생성
+	String uploadPath = application.getRealPath("../upload");
 	out.print(uploadPath);
 	int size = 10 * 1024 * 1024;
 	String name = "";
@@ -18,11 +20,9 @@
 		name = multi.getParameter("name");
 		subject = multi.getParameter("subject");
 		Enumeration files = multi.getFileNames();
-
 		String file1 = (String) files.nextElement();
 		filename1 = multi.getFilesystemName(file1);
 		origfilename1 = multi.getOriginalFileName(file1);
-
 		String file2 = (String) files.nextElement();
 		filename2 = multi.getFilesystemName(file2);
 		origfilename2 = multi.getOriginalFileName(file2);
@@ -30,10 +30,8 @@
 		e.printStackTrace();
 	}
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>파일 업로드</title>
 </head>
 <body>
@@ -47,6 +45,5 @@
 	</form>
 	<a href="#" onclick="javascript:fileCheck.submit()">업로드 확인 및 다운로드
 		페이지 이동 </a>
-
 </body>
 </html>

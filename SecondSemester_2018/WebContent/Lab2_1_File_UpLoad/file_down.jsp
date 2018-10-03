@@ -4,7 +4,7 @@
 <%@ page import="java.io.*"%>
 <%
 	String fileName = request.getParameter("file_name");
-	String savePath = "upload";
+	String savePath = "../upload";
 	ServletContext context = getServletContext();
 	String sDownloadPath = context.getRealPath(savePath);
 	// 업로드 된 실제 경로를 찾아 온다.
