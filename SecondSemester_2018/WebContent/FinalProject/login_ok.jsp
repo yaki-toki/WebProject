@@ -10,9 +10,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:set var="userID" value="${param.userID }" scope="session"/>
-	<c:set var="userPassword" value="${param.userPassword }" scope="session"/>
+	<c:set var="flag" value="2" scope="session"/>
+	<c:if test="${param.userID !=null && param.userPassword != null}">
+		<c:set var="userid" value="${param.userID }" scope="session" />
+		<c:set var="userpassword" value="${param.userPassword }" scope="session" />
+		<c:remove var="flag"/>
+		<c:set var="flag" value="1" scope="session"/>
+	</c:if>
 	<c:remove var="pagefile" />
+	<c:out value="${param.userID }"/>
+	<c:out value="${flag }"/>
 	<jsp:forward page="index.jsp"/>
 </body>
 </html>
