@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"%>
 <%@ page import="java.sql.*"%>
-<%@ page import="javax.sql.*"%>
 <%@ page import="javax.naming.*"%>
 <%
 	String id = null;
