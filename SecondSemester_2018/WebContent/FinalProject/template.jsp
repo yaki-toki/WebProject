@@ -12,15 +12,16 @@
 	<div class="header">
 		<c:import url="headerMenu.jsp" />
 	</div>
-	
-	<div class = "nav">
+
+	<div class="nav">
+		<c:import url="menu.jsp" />
 	</div>
 
 	<div class="section">
 		<c:import url="${pagefile }.jsp" />
 		<h2>Session</h2>
 	</div>
-	
+
 	<div class="aside">
 		<c:if test="${flag ==1}">
 			<c:out value="${userid }" />
@@ -36,7 +37,7 @@
 			<c:import url="loginForm.jsp" />
 		</c:if>
 	</div>
-	
+
 
 	<div class="footer">
 		<h3>템플릿 페이지 입니다.2</h3>
