@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${param.userID != '' && param.userPassword != ''}">
+	<c:if test="${not empty param.userID && not empty param.userPassword}">
 		<c:set var="userid" value="${param.userID }" scope="session" />
 		<c:set var="userpassword" value="${param.userPassword }" scope="session" />
 		<c:remove var="flag"/>
