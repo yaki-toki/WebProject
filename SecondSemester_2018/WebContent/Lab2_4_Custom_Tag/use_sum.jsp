@@ -9,8 +9,7 @@
 </head>
 <body>
 	<tf:sum begin="1" end="10">
-1-10까지 합 : ${sum}
-</tf:sum>
-
+		1-10까지 합 : ${sum}
+	</tf:sum>
 </body>
 </html>
