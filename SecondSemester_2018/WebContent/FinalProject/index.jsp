@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:set var="pagefile" value="${param.pagefile }" scope="session"/>
+	<c:set var="pagefile" value="${param.pagefile }" scope="session" />
 	<c:if test="${pagefile == null }">
-		<c:set var="pagefile" value="intro" scope="session"/>
+		<c:set var="pagefile" value="intro" scope="session" />
 	</c:if>
-	<jsp:forward page="template.jsp"/>
+	<jsp:forward page="template.jsp" />
 </body>
 </html>
