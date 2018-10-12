@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="tf" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,12 +15,11 @@
 <body>
 	<h1>커피 주문</h1>
 	<form action="Lab2_option.jsp" method="post">
-		<!-- 배열의 내용을 저장해서 forEach문을 이용해서 출력한다. -->
-		<c:set var="me" value="<%=menu%>" />
-		<c:forEach var="i" items="${me}">
-			<strong>${i} <input type="checkbox" name="menu" value="${i }"></strong>
-		</c:forEach>
-		<input type="submit" value="옵션 선택">
+		<h1>커피 주문</h1>
+		
+		<tf:check_tag name="coffee" coffee1="아메리카노" coffee2="카페라떼" coffee3="바닐라라떼" />
+		
+		<input type="submit" value="옵션선택">
 	</form>
 </body>
 </html>
