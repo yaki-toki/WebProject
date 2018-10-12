@@ -12,22 +12,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<fmt:requestEncoding value="euc-kr" />
-	<c:set var="menu" value="${paramValues.menu }" />
-	
-	<!-- 앞에서 전송한 매뉴를 받아와서 선택한 수를 검사한다. -->
-	<c:if test="${fn:length(paramValues.menu) != 0}">
-		<c:forEach var="menu" items="${menu }">
-			${menu }
-			<tf:select name="${menu }_tem" ice="ice" hot="hot" />
-			<tf:select name="${menu }_size" tall="tall" grande="grande" venti="venti" />
+	<%
+		request.setCharacterEncoding("euc-kr");
+	%>
+	<c:if test="${paramValues.coffee!=null}">
+		<c:forEach var="i" items="${paramValues.coffee}" step="1">
+			<b>${i}</b>
+				옵션 : <tf:option name="option1" ice="ice" hot="hot" />
+				사이즈 <tf:option name="option2" tall="tall" grande="grande" venti="venti" />
 			<br>
 		</c:forEach>
 	</c:if>
-	
-	<!-- 선택한 값이 없는경우 출력 -->
-	<c:if test="${fn:length(paramValues.menu) == 0 }">
-		선택안함
+	<c:if test="${paramValues.coffee==null}">
+		선택안함!
 	</c:if>
+
 </body>
 </html>
