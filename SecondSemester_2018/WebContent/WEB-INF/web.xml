@@ -16,9 +16,18 @@
 	<jsp-config>
 		<taglib>
 			<taglib-uri>/Functions.tld</taglib-uri>
-			<taglib-location>
-				/WEB-INF/Functions.tld
-			</taglib-location>
+			<taglib-location>/WEB-INF/Functions.tld</taglib-location>
 		</taglib>
 	</jsp-config>
+
+	<servlet>
+		<servlet-name>now</servlet-name>
+		<servlet-class>ServletBasic.NowServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>now</servlet-name>
+		<url-pattern>/now</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
