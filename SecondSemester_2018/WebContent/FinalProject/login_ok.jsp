@@ -10,11 +10,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${not empty param.userID && not empty param.userPassword}">
-		<c:set var="userid" value="${param.userID }" scope="session" />
+	<c:if test="${not empty param.userEmail && not empty param.userPassword}">
+		<c:set var="userid" value="${param.userEmail }" scope="session" />
 		<c:set var="userpassword" value="${param.userPassword }" scope="session" />
 		<c:remove var="flag"/>
 		<c:set var="flag" value="1" scope="session"/>
+	</c:if>
+	<c:if test="${empty param.userEmail || empty param.userPassword }">
+		<script type="text/javascript">
+			alert("后 沫阑 盲况林技夸.");
+		</script>
 	</c:if>
 	<c:remove var="pagefile" />
 	<jsp:forward page="index.jsp"/>

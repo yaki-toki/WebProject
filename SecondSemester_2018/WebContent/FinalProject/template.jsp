@@ -7,6 +7,7 @@
 <link type="text/css" rel="stylesheet" href="myStyle.css">
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 </head>
 <body>
 	<div class="header">
@@ -23,13 +24,15 @@
 	</div>
 
 	<div class="aside">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 		<c:if test="${flag ==1}">
 			<c:out value="${userid }" />
 			<br />
 			<c:out value="${userpassword }" />
 			<br />
 			<form action="login_out.jsp" method="post">
-				<input type="submit" value="로그아웃" />
+				<button type="submit" class="btn btn-primary">Log Out</button>
 			</form>
 		</c:if>
 

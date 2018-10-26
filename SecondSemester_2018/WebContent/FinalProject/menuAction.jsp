@@ -7,12 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
-<body>
-	<c:set var="pagefile" value="${param.pagefile }" scope="session" />
-	<c:if test="${pagefile == null }">
-		<c:set var="pagefile" value="intro" scope="session" />
-	</c:if>
-	<%-- <jsp:forward page="template.jsp" /> --%>
-	<c:redirect url="template.jsp"/>
-</body>
-</html> 
+<c:set var="menu" value="${param.menu }" scope="session" />
+<c:redirect url="menuPage.jsp" />
+</html>

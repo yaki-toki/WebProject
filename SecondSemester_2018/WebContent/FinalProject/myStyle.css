@@ -4,11 +4,11 @@ html, body {
 	margin: auto;
 	padding: 5px;
 	height: 85%;
-	width: 1500px;
+	width: 1400px;
 }
 
 .header {
-	width: 1475px;
+	width: 1115px;
 	height: 20%;
 	border: 1px solid;
 	margin: 5px;
@@ -24,7 +24,7 @@ html, body {
 }
 
 .section {
-	width: 1000px;
+	width: 700px;
 	height: 70%;
 	float: left;
 	border: 1px solid;
@@ -33,7 +33,7 @@ html, body {
 }
 
 .aside {
-	width: 250px;
+	width: 200px;
 	height: 70%;
 	float: left;
 	border: 1px solid;
@@ -42,7 +42,7 @@ html, body {
 }
 
 .footer {
-	width: 1475px;
+	width: 1115px;
 	height: 10%;
 	clear: both;
 	border: 1px solid;
@@ -52,6 +52,7 @@ html, body {
 .imglogo {
 	width: 200px;
 	height: 95px;
+	margin: auto;
 }
 
 .loginTable {
@@ -72,6 +73,47 @@ html, body {
 	margin: 5px;
 	cursor: pointer;
 	float: center;
+}
+
+button {
+	background: #1AAB8A;
+	color: #fff;
+	border: none;
+	position: relative;
+	height: 60px;
+	font-size: 1.6em;
+	padding: 0 2em;
+	cursor: pointer;
+	transition: 800ms ease all;
+	outline: none;
+}
+
+button:hover {
+	background: #fff;
+	color: #1AAB8A;
+}
+
+button:before, button:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2px;
+	width: 0;
+	background: #1AAB8A;
+	transition: 400ms ease all;
+}
+
+button:after {
+	right: inherit;
+	top: inherit;
+	left: 0;
+	bottom: 0;
+}
+
+button:hover:before, button:hover:after {
+	width: 100%;
+	transition: 800ms ease all;
 }
 
 /*버튼 스타일*/

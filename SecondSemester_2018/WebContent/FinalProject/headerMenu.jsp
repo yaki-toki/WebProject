@@ -11,18 +11,9 @@
 	<table>
 		<tr>
 			<td><img class="imglogo" src="img/kimyaki.png"></td>
-		</tr>
-	</table>
-</div>
-
-<!-- 아래 div태그 수직 정렬 해야됨... -->
-<div style="float: right;">
-	<table >
-		<tr>
 			<td><input type="button" value="홈"
 				onclick="location='index.jsp'"></td>
-			<td><input type="button" value="리스트"
-				onclick="location='./index.jsp?pagefile=list'"></td>
+			<td><input type="button" value="리스트" onclick="location='./index.jsp?pagefile=list'"></td>
 		</tr>
 	</table>
 </div>
