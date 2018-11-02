@@ -1,9 +1,9 @@
 package jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -34,7 +34,7 @@ public class JdbcUtil {
 		}
 	}
 
-	public static void close(Statement stmt) {
+	public static void close(PreparedStatement stmt) {
 		if (stmt != null) {
 			try {
 				stmt.close();
