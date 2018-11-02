@@ -24,15 +24,14 @@
 	</div>
 
 	<div class="aside">
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		
 		<c:if test="${flag ==1}">
 			<c:out value="${userid }" />
 			<br />
 			<c:out value="${userpassword }" />
 			<br />
 			<form action="login_out.jsp" method="post">
-				<button type="submit" class="btn btn-primary">Log Out</button>
+				<button type="submit" class="button1" style="font-size:13px;">Log Out</button>
 			</form>
 		</c:if>
 
