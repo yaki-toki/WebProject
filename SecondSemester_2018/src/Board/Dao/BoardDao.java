@@ -184,4 +184,27 @@ public class BoardDao {
 		}
 		return boardBean;
 	}
+
+	// 조회수 업데이트.
+	public int updateReadCount(int board_num) {
+		PreparedStatement pstmt = null;
+		int updateCount = 0;
+		String sql = "";
+		try {
+			sql = "update board set count=count+1 where idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, board_num);
+			updateCount = pstmt.executeUpdate();
+			if (updateCount > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+		} catch (SQLException ex) {
+			System.out.println("setReadCountUpdate 에러 : " + ex);
+		} finally {
+			close(pstmt);
+		}
+		return updateCount;
+	}
 }
