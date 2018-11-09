@@ -236,4 +236,26 @@ public class BoardDao {
 		}
 		return updateCount;
 	}
+
+	// 글 삭제.
+	public int deleteArticle(int board_num) {
+		PreparedStatement pstmt = null;
+		String board_delete_sql = "delete from board where idx=?";
+		int deleteCount = 0;
+		try {
+			pstmt = con.prepareStatement(board_delete_sql);
+			pstmt.setInt(1, board_num);
+			deleteCount = pstmt.executeUpdate();
+			if (deleteCount > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+		} catch (Exception ex) {
+			System.out.println("boardDelete 에러 : " + ex);
+		} finally {
+			close(pstmt);
+		}
+		return deleteCount;
+	}
 }
