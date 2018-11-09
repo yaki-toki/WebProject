@@ -110,29 +110,39 @@ public class BoardDao {
 		ResultSet rs = null;
 		String board_list_sql = "";
 		List<BoardBean> articleList = new ArrayList<BoardBean>();
+		// Board에 저장된 값들을 리스트 형태로 만들어서 초기화
 		BoardBean board = null;
-		int startrow = page; // 읽기 시작할 row 번호..
+		int startrow = page; // 읽기 시작할 row 번호 즉, 페이지 번호
 		try {
+			// 검색 기능
 			if (keyWord.equals("null") || keyWord.equals("")) {
+				// 검색 조건이 없는 경우 내림 차순(desc)으로 10개씩 출력
 				board_list_sql = "select * from board order by idx desc limit ?,10";
 				pstmt = con.prepareStatement(board_list_sql);
 				pstmt.setInt(1, startrow);
 			} else {
+				// 검색 조건이 있는 경우
+				// keyField : 글쓴이, 제목, 글 내용 등등 검색 키워드가 포함되어 있는 컬럼
 				board_list_sql = "select * from board where " + keyField + " like ? order by idx desc limit ?,10";
 				pstmt = con.prepareStatement(board_list_sql);
 				pstmt.setString(1, "%" + keyWord + "%");
 				pstmt.setInt(2, startrow);
 			}
+			// 쿼리문 실행
 			rs = pstmt.executeQuery();
+			
+			// while문을 이용해서 각 열의 값들을 받아온다.
 			while (rs.next()) {
+				// 반복이 시작되면 board를 초기화
 				board = new BoardBean();
 				board.setIdx(rs.getInt("idx"));
 				board.setName(rs.getString("mem_name"));
 				board.setTitle(rs.getString("title"));
 				board.setReplycount(rs.getInt("replycount"));
 				board.setReg_date(rs.getString("reg_date"));
-				board.setReplycount(rs.getInt("replycount"));
 				board.setCount(rs.getInt("count"));
+				
+				// 위에서 set한 값들이 저장된 board객체를 articleList에 저장
 				articleList.add(board);
 			}
 		} catch (Exception ex) {
