@@ -333,4 +333,33 @@ public class BoardDao {
 		}
 		return updateCount;
 	}
+
+	// 댓글목록
+	public List<Board_Reply> replyBoard(int board_num) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String reply_list_sql = "select * from board_reply where board_no=?";
+		List<Board_Reply> replyList = new ArrayList<Board_Reply>();
+		Board_Reply reply = null;
+		try {
+			pstmt = con.prepareStatement(reply_list_sql);
+			pstmt.setInt(1, board_num);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				reply = new Board_Reply();
+				reply.setIdx(rs.getInt("idx"));
+				reply.setMem_name(rs.getString("mem_name"));
+				reply.setContent(rs.getString("content"));
+				reply.setReg_date(rs.getString("reg_date"));
+				reply.setIp(rs.getString("ip"));
+				replyList.add(reply);
+			}
+		} catch (Exception ex) {
+			System.out.println("getReplyList 에러 : " + ex);
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return replyList;
+	}
 }
