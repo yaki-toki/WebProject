@@ -207,4 +207,33 @@ public class BoardDao {
 		}
 		return updateCount;
 	}
+
+	public int updateArticle(BoardBean bean) {
+		int updateCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "update board set mem_name=?,title=?,content=?, filename=?,filesize=?, ip =? where idx=?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bean.getName());
+			pstmt.setString(2, bean.getTitle());
+			pstmt.setString(3, bean.getContent());
+			pstmt.setString(4, bean.getFilename());
+			pstmt.setInt(5, bean.getFilesize());
+			pstmt.setString(6, bean.getIp());
+			pstmt.setInt(7, bean.getIdx());
+			pstmt.executeUpdate();
+			int update = pstmt.executeUpdate();
+			if (update > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+			updateCount = pstmt.executeUpdate();
+		} catch (Exception ex) {
+			System.out.println("boardModify 에러 : " + ex);
+		} finally {
+			close(pstmt);
+		}
+		return updateCount;
+	}
 }
