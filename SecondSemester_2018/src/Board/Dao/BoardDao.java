@@ -258,4 +258,26 @@ public class BoardDao {
 		}
 		return deleteCount;
 	}
+
+	// 글쓴이인지 확인.
+	public boolean isArticleBoardWriter(int board_num, String pass) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String board_sql = "select * from board where idx=?";
+		boolean isWriter = false;
+		try {
+			pstmt = con.prepareStatement(board_sql);
+			pstmt.setInt(1, board_num);
+			rs = pstmt.executeQuery();
+			rs.next();
+			if (pass.equals(rs.getString("pass"))) {
+				isWriter = true;
+			}
+		} catch (SQLException ex) {
+			System.out.println("isBoardWriter 에러 : " + ex);
+		} finally {
+			close(pstmt);
+		}
+		return isWriter;
+	}
 }
