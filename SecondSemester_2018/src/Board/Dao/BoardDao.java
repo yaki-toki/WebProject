@@ -384,4 +384,27 @@ public class BoardDao {
 		}
 		return deleteCount;
 	}
+
+	// 댓글 삭제 후 카운트 값 감소
+	public int deleteReply_Count(int reply_num) {
+		PreparedStatement pstmt = null;
+		int updateCount = 0;
+		String sql = "";
+		try {
+			sql = "update board set replycount = replycount - 1 where idx=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, reply_num);
+			updateCount = pstmt.executeUpdate();
+			if (updateCount > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+		} catch (SQLException ex) {
+			System.out.println("setReadCountUpdate 에러 : " + ex);
+		} finally {
+			close(pstmt);
+		}
+		return updateCount;
+	}
 }
