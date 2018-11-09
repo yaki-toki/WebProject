@@ -362,4 +362,26 @@ public class BoardDao {
 		}
 		return replyList;
 	}
+
+	// 댓글 삭제.
+	public int deleteReply(int reply_num) {
+		PreparedStatement pstmt = null;
+		String board_delete_sql = "delete from board_reply where idx=?";
+		int deleteCount = 0;
+		try {
+			pstmt = con.prepareStatement(board_delete_sql);
+			pstmt.setInt(1, reply_num);
+			deleteCount = pstmt.executeUpdate();
+			if (deleteCount > 0) {
+				commit(con);
+			} else {
+				rollback(con);
+			}
+		} catch (Exception ex) {
+			System.out.println("boardDelete 에러 : " + ex);
+		} finally {
+			close(pstmt);
+		}
+		return deleteCount;
+	}
 }
