@@ -18,16 +18,32 @@ public class BoardFrontController extends HttpServlet {
 		String command = RequestURI.substring(contextPath.length());
 		ActionForward forward = null;
 		CommandHadler action = null;
-
+		// ./board/write
 		if (command.equals("/write.board")) {
 			forward = new ActionForward();
-			forward.setPath("/main.jsp?pagefile=./board/write");
+			forward.setPath("main.jsp?pagefile=./board/write");
 		} else if (command.equals("/writePro.board")) {
 			action = new WriteHandler();
 			try {
 				forward = action.process(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+		} else if (command.equals("/boardList.board")) {
+			action = new BoardListHandler();
+			try {
+				forward = action.process(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (forward != null) {
+			if (forward.isRedirect()) {
+				response.sendRedirect(forward.getPath());
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+				dispatcher.forward(request, response);
 			}
 		}
 
