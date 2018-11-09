@@ -130,7 +130,7 @@ public class BoardDao {
 			}
 			// 쿼리문 실행
 			rs = pstmt.executeQuery();
-			
+
 			// while문을 이용해서 각 열의 값들을 받아온다.
 			while (rs.next()) {
 				// 반복이 시작되면 board를 초기화
@@ -141,7 +141,7 @@ public class BoardDao {
 				board.setReplycount(rs.getInt("replycount"));
 				board.setReg_date(rs.getString("reg_date"));
 				board.setCount(rs.getInt("count"));
-				
+
 				// 위에서 set한 값들이 저장된 board객체를 articleList에 저장
 				articleList.add(board);
 			}
@@ -154,4 +154,34 @@ public class BoardDao {
 		return articleList;
 	}
 
+	// 글 내용 보기.
+	public BoardBean selectArticle(int board_num) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoardBean boardBean = null;
+		try {
+			pstmt = con.prepareStatement("select * from board where idx= ?");
+			pstmt.setInt(1, board_num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				boardBean = new BoardBean();
+				boardBean.setIdx(rs.getInt("idx"));
+				boardBean.setName(rs.getString("mem_name"));
+				boardBean.setTitle(rs.getString("title"));
+				boardBean.setContent(rs.getString("content"));
+				boardBean.setReg_date(rs.getString("reg_date"));
+				boardBean.setPass(rs.getString("pass"));
+				boardBean.setCount(rs.getInt("count"));
+				boardBean.setFilename(rs.getString("filename"));
+				boardBean.setFilesize(rs.getInt("filesize"));
+				boardBean.setIp(rs.getString("ip"));
+			}
+		} catch (Exception ex) {
+			System.out.println("getDetail 에러 : " + ex);
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return boardBean;
+	}
 }
