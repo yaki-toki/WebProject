@@ -11,7 +11,7 @@
 </head>
 <script type="text/javascript">
 	function goWrite() {
-		location.href = "main.jsp?pagefile=./board/write";
+		location.href = "./write.board";
 	}
 	function goSearch() {
 		if (document.search.keyWord.value == "") {
@@ -39,6 +39,7 @@
 			<th scope="col">날짜</th>
 			<th scope="col">조회수</th>
 		</tr>
+		<!-- articlePage라는 값은 BoardListHandler에서 request에서 만든 값 -->
 		<c:if test="${articlePage.hasNoArticles()}">
 			<tr>
 				<td colspan="5">게시글이 없습니다.</td>
@@ -47,10 +48,12 @@
 		<c:forEach var="article" items="${articlePage.content}">
 			<tr>
 				<td>${article.idx}</td>
-				<td><a
-					href="read.board?no=${article.idx}&pageNo=${articlePage.currentPage}"><c:out
-							value="${article.title}" /> [<c:out
-							value="${article.replycount}" />]</a></td>
+				<td>
+					<a href="read.board?no=${article.idx}&pageNo=${articlePage.currentPage}">
+						<c:out value="${article.title}" />
+						[<c:out value="${article.replycount}" />]
+					</a>
+				</td>
 				<td>${article.getName()}</td>
 				<td>${article.getReg_date()}</td>
 				<td>${article.getCount()}</td>
