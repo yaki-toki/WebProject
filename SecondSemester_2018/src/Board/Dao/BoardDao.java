@@ -104,4 +104,44 @@ public class BoardDao {
 		return listCount;
 	}
 
+	// 글 목록 보기.
+	public List<BoardBean> selectBorad(int page, int limit, String keyWord, String keyField) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String board_list_sql = "";
+		List<BoardBean> articleList = new ArrayList<BoardBean>();
+		BoardBean board = null;
+		int startrow = page; // 읽기 시작할 row 번호..
+		try {
+			if (keyWord.equals("null") || keyWord.equals("")) {
+				board_list_sql = "select * from board order by idx desc limit ?,10";
+				pstmt = con.prepareStatement(board_list_sql);
+				pstmt.setInt(1, startrow);
+			} else {
+				board_list_sql = "select * from board where " + keyField + " like ? order by idx desc limit ?,10";
+				pstmt = con.prepareStatement(board_list_sql);
+				pstmt.setString(1, "%" + keyWord + "%");
+				pstmt.setInt(2, startrow);
+			}
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				board = new BoardBean();
+				board.setIdx(rs.getInt("idx"));
+				board.setName(rs.getString("mem_name"));
+				board.setTitle(rs.getString("title"));
+				board.setReplycount(rs.getInt("replycount"));
+				board.setReg_date(rs.getString("reg_date"));
+				board.setReplycount(rs.getInt("replycount"));
+				board.setCount(rs.getInt("count"));
+				articleList.add(board);
+			}
+		} catch (Exception ex) {
+			System.out.println("getBoardList 에러 : " + ex);
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return articleList;
+	}
+
 }
