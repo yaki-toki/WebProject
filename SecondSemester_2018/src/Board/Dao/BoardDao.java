@@ -280,4 +280,34 @@ public class BoardDao {
 		}
 		return isWriter;
 	}
+
+	// 글 답변.
+	public boolean insertReplyArticle(Board_Reply bean) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		try {
+			sql = "insert board_reply(board_no, mem_name,pass, content,reg_date,ip)";
+			sql += "values(?, ?, ?, ?, now(), ?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bean.getBoard_no());
+			pstmt.setString(2, bean.getMem_name());
+			pstmt.setString(3, bean.getPass());
+			pstmt.setString(4, bean.getContent());
+			pstmt.setString(5, bean.getIp());
+			int insertedCount = pstmt.executeUpdate();
+			if (insertedCount > 0) {
+				commit(con);
+				return true;
+			} else {
+				rollback(con);
+			}
+		} catch (SQLException ex) {
+			System.out.println("boardReply 에러 : " + ex);
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return false;
+	}
 }
