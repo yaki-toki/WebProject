@@ -36,7 +36,7 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="main.jsp">Main</a></li>
-				<li><a href="main.jsp?pagefile=./board/list">Board</a></li>
+				<li><a href="boardList.board">Board</a></li>
 			</ul>
 			<form id="signin" class="navbar-form navbar-right" role="form">
 				<div class="input-group">
