@@ -55,9 +55,8 @@ public class BoardDao {
 			else
 				num = 1;
 
-			sql = "insert board(mem_name, content, title, replycount, "
-					+ "reg_date, pass,count,ip,filename,filesize) "
-					+ "values(?,?,?,0,now(),?,0,?,?,?)";
+			sql = "insert into board(mem_name, content, title, replycount, "
+					+ "reg_date, pass,count,ip,filename,filesize) " + "values(?,?,?,0,now(),?,0,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, board.getName());
@@ -84,21 +83,24 @@ public class BoardDao {
 		}
 		return false;
 	}
-	
+
+	// 글의 개수 구하기.
 	public int selectListCount() {
 		int listCount = 0;
-		
 		try {
-			System.out.println("Connection");
+			System.out.println("connection");
 			con = getConnection();
 			pstmt = con.prepareStatement("select count(*) from board");
 			rs = pstmt.executeQuery();
-			if(rs.next())
+			if (rs.next()) {
 				listCount = rs.getInt(1);
-		}catch(Exception ex) {
-			System.out.println("getListCount 에러 : "+ex);
+			}
+		} catch (Exception ex) {
+			System.out.println("getListCount 에러: " + ex);
+		} finally {
+			close(rs);
+			close(pstmt);
 		}
-		
 		return listCount;
 	}
 
