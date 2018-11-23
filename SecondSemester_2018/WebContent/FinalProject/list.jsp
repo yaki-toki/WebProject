@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <div>
-<h2>LIST</h2>
+<h2>List</h2>
 </div>
 </html>
