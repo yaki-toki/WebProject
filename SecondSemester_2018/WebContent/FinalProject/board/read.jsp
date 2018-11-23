@@ -32,7 +32,7 @@
 	</table>
 	<hr />
 
-   [<a href="# ">리스트 </a> |
+   [<a href="index.jsp?pagefile=./board/list">리스트 </a> |
 	<a href="# ">수 정</a> |
 	<a href="#">답 변</a> |
 	<a href="#">삭 제</a> ]
