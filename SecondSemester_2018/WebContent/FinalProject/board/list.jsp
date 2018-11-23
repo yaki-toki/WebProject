@@ -45,7 +45,7 @@
 			<td>0</td>
 		</tr>
 	</table>
-	<input type="button" onclick="goWrite()" value="글쓰기">
+	<input type="button" onclick="goWrite()" class="button1" value="글쓰기">
 	<div class="paging">
 		<ol>
 			<li>[이전]</li>
