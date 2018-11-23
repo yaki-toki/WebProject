@@ -12,25 +12,59 @@ import javax.servlet.http.HttpServlet;
 public class BoardFrontController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		request.setCharacterEncoding("euc-kr");
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
 		ActionForward forward = null;
-		CommandHadler action = null;
-		// ./board/write
-		if (command.equals("/write.board")) {
+		CommandHandler action = null;
+
+		if (command.equals("/Lab2_8_Board/write.board")) {
 			forward = new ActionForward();
-			forward.setPath("main.jsp?pagefile=./board/write");
-		} else if (command.equals("/writePro.board")) {
+			forward.setPath("/Lab2_8_Board/main.jsp?pagefile=./board/write");
+		} else if (command.equals("/Lab2_8_Board/writePro.board")) {
 			action = new WriteHandler();
 			try {
 				forward = action.process(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/boardList.board")) {
+		} else if (command.equals("/Lab2_8_Board/boardList.board")) {
 			action = new BoardListHandler();
+			try {
+				forward = action.process(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/Lab2_8_Board/read.board")) {
+			action = new ReadHandler();
+			try {
+				forward = action.process(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/Lab2_8_Board/reply.board")) {
+			action = new BoardReplyHandler();
+			try {
+				forward = action.process(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/Lab2_8_Board/modifyPwd.board")) {
+			forward = new ActionForward();
+			forward.setPath("/Lab2_8_Board/main.jsp?pagefile=./board/PwdCheck");
+		} 
+		else if (command.equals("/Lab2_8_Board/modifyForm.board")) {
+			action = new PwdCheckHandler();
+			try {
+				forward = action.process(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 
+		else if (command.equals("/Lab2_8_Board/modify.board")) {
+			action = new ModifyHandler();
 			try {
 				forward = action.process(request, response);
 			} catch (Exception e) {
