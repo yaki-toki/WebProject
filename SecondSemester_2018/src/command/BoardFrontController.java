@@ -74,7 +74,7 @@ public class BoardFrontController extends HttpServlet {
 			int board_num = Integer.parseInt(request.getParameter("no"));
 			request.setAttribute("board_num", board_num);
 			forward = new ActionForward();
-			forward.setPath("/main.jsp?pagefile=./board/delete");
+			forward.setPath("/Lab2_8_Board/main.jsp?pagefile=./board/delete");
 		} else if (command.equals("/Lab2_8_Board/delete.board")) {
 			action = new DeleteHandler();
 			try {
