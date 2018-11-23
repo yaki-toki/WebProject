@@ -39,9 +39,10 @@
 					maxlength="50"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="등록"> <input
-					type="reset" value="다시쓰기"> <input type="button" value="리스트"
-					onClick="javascript:location.href='boardList.board'"></td>
+				<td colspan="2"><input type="submit" value="등록">
+					 <input type="reset" value="다시쓰기"> 
+					<input type="button" value="리스트" onClick="javascript:location.href='boardList.board'">
+				</td>
 			</tr>
 		</table>
 	</form>
