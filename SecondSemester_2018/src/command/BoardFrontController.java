@@ -54,17 +54,29 @@ public class BoardFrontController extends HttpServlet {
 		} else if (command.equals("/Lab2_8_Board/modifyPwd.board")) {
 			forward = new ActionForward();
 			forward.setPath("/Lab2_8_Board/main.jsp?pagefile=./board/PwdCheck");
-		} 
-		else if (command.equals("/Lab2_8_Board/modifyForm.board")) {
+		} else if (command.equals("/Lab2_8_Board/modifyForm.board")) {
 			action = new PwdCheckHandler();
 			try {
 				forward = action.process(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} 
-		else if (command.equals("/Lab2_8_Board/modify.board")) {
+		} else if (command.equals("/Lab2_8_Board/modify.board")) {
 			action = new ModifyHandler();
+			try {
+				forward = action.process(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/Lab2_8_Board/deleteForm.board")) {
+			String nowPage = request.getParameter("pageNo");
+			request.setAttribute("page", nowPage);
+			int board_num = Integer.parseInt(request.getParameter("no"));
+			request.setAttribute("board_num", board_num);
+			forward = new ActionForward();
+			forward.setPath("/main.jsp?pagefile=./board/delete");
+		} else if (command.equals("/Lab2_8_Board/delete.board")) {
+			action = new DeleteHandler();
 			try {
 				forward = action.process(request, response);
 			} catch (Exception e) {
