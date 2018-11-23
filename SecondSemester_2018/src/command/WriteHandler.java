@@ -12,7 +12,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import Board.Dao.BoardDao;
 import Board.model.BoardBean;
 
-public class WriteHandler implements CommandHadler {
+public class WriteHandler implements CommandHandler {
 	private BoardBean data = new BoardBean(); // 데이터
 	private BoardDao boardDao = new BoardDao();
 	private ActionForward forward = new ActionForward();
@@ -34,7 +34,7 @@ public class WriteHandler implements CommandHadler {
 	}
 
 	private ActionForward processSubmit(HttpServletRequest req, HttpServletResponse res) {
-		String realFolder = "";
+		String realFolder = "C:\\Users\\rlawl\\git\\2018SecondSemester\\SecondSemester_2018\\WebContent\\boardfile";
 		String saveFolder = "Board";
 		int fileSize = 5 * 1024 * 1024; // 5MB
 		realFolder = req.getRealPath(saveFolder);
@@ -60,7 +60,7 @@ public class WriteHandler implements CommandHadler {
 				return null;
 			}
 			forward.setRedirect(true);
-			forward.setPath("./boardList.board");
+			forward.setPath("/Lab2_8_Board/boardList.board");
 			return forward;
 		} catch (Exception ex) {
 			ex.printStackTrace();
