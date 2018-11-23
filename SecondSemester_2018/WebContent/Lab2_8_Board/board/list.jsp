@@ -54,7 +54,7 @@
 						[<c:out value="${article.replycount}" />]
 					</a>
 				</td>
-				<td>${article.getName()}</td>
+				<td>${article.name}</td>
 				<td>${article.getReg_date()}</td>
 				<td>${article.getCount()}</td>
 			</tr>
