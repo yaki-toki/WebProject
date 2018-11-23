@@ -11,16 +11,18 @@ import Board.Dao.BoardDao;
 
 public class ReadHandler implements CommandHandler {
 	public ActionForward process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// article.idx의 값을 가져와서 board_num에 저장한다.
 		int board_num = Integer.parseInt(request.getParameter("no"));
 		String page = request.getParameter("pageNo");
 		BoardBean article = getArticle(board_num);
+		
 		List<Board_Reply> reply = getReplyList(board_num);
 		request.setAttribute("reply", reply);
-		;
+
 		ActionForward forward = new ActionForward();
 		request.setAttribute("page", page);
 		request.setAttribute("article", article);
-		forward.setPath("main.jsp?pagefile=./board/read");
+		forward.setPath("/Lab2_8_Board/main.jsp?pagefile=./board/read");
 		return forward;
 	}
 
