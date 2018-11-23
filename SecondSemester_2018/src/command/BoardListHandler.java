@@ -43,9 +43,11 @@ public class BoardListHandler implements CommandHandler {
 		// 현제 페이지 번호와 내용의 키워드, 필드의 값을 PageInfo에 넘김
 		PageInfo articlePage = getArticlePage(pageNo, word, Field);
 		
+		System.out.println(articlePage.getContent().get(0));
+		
 		request.setAttribute("articlePage", articlePage);
 		ActionForward forward = new ActionForward();
-		forward.setPath("/main.jsp?pagefile=./board/list");
+		forward.setPath("/Lab2_8_Board/main.jsp?pagefile=./board/list");
 		
 		//페이지 전환 시키기 위한 forward값을 전달
 		return forward;
