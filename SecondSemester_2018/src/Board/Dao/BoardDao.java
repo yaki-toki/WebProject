@@ -1,23 +1,27 @@
 package Board.Dao;
 
-import static jdbc.JdbcUtil.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.ArrayList;
-import javax.sql.DataSource;
+import static jdbc.JdbcUtil.close;
+import static jdbc.JdbcUtil.commit;
+import static jdbc.JdbcUtil.getConnection;
+import static jdbc.JdbcUtil.rollback;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.PageContext;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
+import javax.sql.DataSource;
+
 import Board.model.BoardBean;
 import Board.model.Board_Reply;
 
@@ -209,8 +213,7 @@ public class BoardDao {
 	public int updateArticle(BoardBean bean) {
 		int updateCount = 0;
 		PreparedStatement pstmt = null;
-		String sql = "update board set mem_name=?,title=?,"
-				+ " content=?, filename=?,filesize=?, ip =? where idx=?";
+		String sql = "update board set mem_name=?,title=?," + " content=?, filename=?,filesize=?, ip =? where idx=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getName());
@@ -238,10 +241,14 @@ public class BoardDao {
 
 	// 글 삭제.
 	public int deleteArticle(int board_num) {
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		String board_delete_sql = "delete from board where idx=?";
+		String reply_delete_sql = "delete from board_reply where board_no=?";
 		int deleteCount = 0;
 		try {
+			pstmt2 = con.prepareStatement(reply_delete_sql);
+			pstmt2.setInt(1, board_num);
+			pstmt2.executeUpdate();
 			pstmt = con.prepareStatement(board_delete_sql);
 			pstmt.setInt(1, board_num);
 			deleteCount = pstmt.executeUpdate();
@@ -253,6 +260,7 @@ public class BoardDao {
 		} catch (Exception ex) {
 			System.out.println("boardDelete 에러 : " + ex);
 		} finally {
+			close(pstmt2);
 			close(pstmt);
 		}
 		return deleteCount;
@@ -408,4 +416,47 @@ public class BoardDao {
 		return updateCount;
 	}
 
+	// 파일 다운로드
+	public void downLoad(HttpServletRequest req, HttpServletResponse res, JspWriter out, PageContext pageContext) {
+		try {
+			// 요청객체인 req에서 다운로드 파일명을 문자열로 리턴 받는다.
+			String filename = req.getParameter("filename");
+
+			// 저장된 경로와 다운로드 파일명을 합쳐서 File 객체를 생성한다.
+			File file = new File(UtilMgr.con(SAVEFOLDER + File.separator + filename));
+
+			// 파일의 용량 크기 만큼 byte 배열을 선언한다.
+			byte b[] = new byte[(int) file.length()];
+
+			// 응답 객체 res 헤더필드에 Accept-Ranges에 bytes 단위로 설정한다.
+			res.setHeader("Accept-Ran//ges", "bytes");
+
+			// 요청객체인 req에서 클라이언트의 User-Agent 정보를 리턴 받는다.
+			String strClient = req.getHeader("User-Agent");
+
+			// 브라우저의 버전과 정보를 구분해서 각각 res 헤더필드와 contentType을 설정한다.
+			if (strClient.indexOf("MSIE6.0") != -1) {
+				res.setContentType("application/smnet;charset=euc-kr");
+				res.setHeader("Content-Disposition", "filename=" + filename + ";");
+			} else {
+				res.setContentType("application/smnet;charset=euc-kr");
+				res.setHeader("Content-Disposition", "attachment;filename=" + filename + ";");
+			}
+			out.clear();
+			out = pageContext.pushBody();
+			// 파일 존재 여부에 따라 스트링 방식으로 브라우저로 파일을 전송한다.
+			if (file.isFile()) {
+				BufferedInputStream fin = new BufferedInputStream(new FileInputStream(file));
+				BufferedOutputStream outs = new BufferedOutputStream(res.getOutputStream());
+				int read = 0;
+				while ((read = fin.read(b)) != -1) {
+					outs.write(b, 0, read);
+				}
+				outs.close();
+				fin.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
