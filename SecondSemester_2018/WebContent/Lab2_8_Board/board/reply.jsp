@@ -10,8 +10,10 @@
 </head>
 <body>
 	<form name="post" method="post" action="reply.board">
-		<input type="hidden" name="no" value="${param.no}"> <input
-			type="hidden" name="pageNo" value="${param.pageNo}"> <label>댓글</label>
+		<!-- 받아온 값들을 가져가기 위해서 hidden으로 숨겨서 값을 저장 해 둔다. -->
+		<input type="hidden" name="no" value="${param.no}"> 
+		<input type="hidden" name="pageNo" value="${param.pageNo}"> 
+		<label>댓글</label>
 		<p />
 		<label>이름</label> <input type="text" name="name" size="15"
 			maxlength="15"> <label>비밀번호</label> <input type="password"
