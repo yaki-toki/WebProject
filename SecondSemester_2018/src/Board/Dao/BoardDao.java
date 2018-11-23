@@ -54,11 +54,9 @@ public class BoardDao {
 				num = rs.getInt(1) + 1;
 			else
 				num = 1;
-
-			sql = "insert into board(mem_name, content, title, replycount, "
-					+ "reg_date, pass,count,ip,filename,filesize) " + "values(?,?,?,0,now(),?,0,?,?,?)";
+			sql = "insert board(mem_name,content,title,replycount, reg_date,pass,count,ip,filename,filesize)";
+			sql += "values(?, ?, ?, 0, now(), ?, 0, ?, ?, ?)";
 			pstmt = con.prepareStatement(sql);
-
 			pstmt.setString(1, board.getName());
 			pstmt.setString(2, board.getContent());
 			pstmt.setString(3, board.getTitle());
@@ -66,17 +64,16 @@ public class BoardDao {
 			pstmt.setString(5, board.getIp());
 			pstmt.setString(6, board.getFilename());
 			pstmt.setInt(7, board.getFilesize());
-
 			insertCount = pstmt.executeUpdate();
-
 			if (insertCount > 0) {
 				commit(con);
 				return true;
 			} else {
 				rollback(con);
 			}
+			// return true;
 		} catch (Exception ex) {
-			System.out.println("에러 : " + ex);
+			System.out.println("에러" + ex);
 		} finally {
 			close(rs);
 			close(pstmt);
@@ -208,10 +205,12 @@ public class BoardDao {
 		return updateCount;
 	}
 
+	// 글 수정
 	public int updateArticle(BoardBean bean) {
 		int updateCount = 0;
 		PreparedStatement pstmt = null;
-		String sql = "update board set mem_name=?,title=?,content=?, filename=?,filesize=?, ip =? where idx=?";
+		String sql = "update board set mem_name=?,title=?,"
+				+ " content=?, filename=?,filesize=?, ip =? where idx=?";
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bean.getName());
@@ -270,6 +269,7 @@ public class BoardDao {
 			pstmt.setInt(1, board_num);
 			rs = pstmt.executeQuery();
 			rs.next();
+			// 페스우드 확인 부분
 			if (pass.equals(rs.getString("pass"))) {
 				isWriter = true;
 			}
@@ -407,4 +407,5 @@ public class BoardDao {
 		}
 		return updateCount;
 	}
+
 }
