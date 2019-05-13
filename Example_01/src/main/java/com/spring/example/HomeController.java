@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.JsonNode;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController extends kakao_key{
+public class HomeController extends kakao_key {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -62,11 +62,11 @@ public class HomeController extends kakao_key{
 		mav.addObject("client_id", client_id);
 		mav.addObject("redirect_uri", redirect_uri);
 		mav.addObject("response_type", "code");
-//		final String RequestUrl = 
-//				"https://kauth.kakao.com/oauth/authorize?client_id=" + client_id + 
-//				"&redirect_uri=" + redirect_uri + 
-//				"&response_type=code&scope=talk_message";
-
+		/*
+		 * final String RequestUrl =
+		 * "https://kauth.kakao.com/oauth/authorize?client_id=" + client_id +
+		 * "&redirect_uri=" + redirect_uri + "&response_type=code&scope=talk_message";
+		 */
 		mav.setView(redirectView);
 
 		System.out.println("-----------------------------------------------------------");
@@ -94,7 +94,26 @@ public class HomeController extends kakao_key{
 		session.setAttribute("token", token);
 		System.out.println("-----------------------------------------------------------");
 		System.out.println();
-		return "logininfo";
+
+		node = kr.getKakaoUserInfo(token);
+		System.out.println("사용자 정보 : " + node);
+		System.out.println("-----------------------------------------------------------");
+		System.out.println();
+		// node에 포함된 kakao_account정보
+		JsonNode userAccount = node.get("kakao_account");
+
+		String email = null;
+
+		try {
+			email = userAccount.get("email").toString();
+			if (email.equals("")) {
+				return "CreateEmail";
+			} else {
+				return "redirect:/info";
+			}
+		} catch (Exception e) {
+			return "CreateEmail";
+		}
 	}
 
 	// 로그 아웃
@@ -153,14 +172,24 @@ public class HomeController extends kakao_key{
 		// node에 포함된 kakao_account정보
 		JsonNode userAccount = node.get("kakao_account");
 
+		// email 소유 여부 확인 변수
 		Boolean has_email = Boolean.valueOf(userAccount.get("has_email").toString()).booleanValue();
+		// 사용자 email변수
+		String email = null;
+		try {
+			// 이메일 소유
+			if (has_email) {
+				// 사용자 정보에 email이 있는 경우 생성
+				email = userAccount.get("email").toString();
+			} else {
+				return "CreateEmail";
+			}
 
-		if(has_email) {
-			String email = userAccount.get("email").toString();
-			email = email.replace("\"",  "");
-			session.setAttribute("email",email);
+		} catch (Exception e) {
+			email = userInfo.get("email").toString();
 		}
-		session.setAttribute("has_email", has_email);
+		email = email.replace("\"", "");
+		session.setAttribute("email", email);
 
 		// 세션에 담아준다.
 		session.setAttribute("userID", userID);
