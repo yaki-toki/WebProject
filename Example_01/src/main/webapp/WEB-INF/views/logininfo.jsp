@@ -28,7 +28,7 @@
 				<a href="/example/userlist">사용자 목록</a>
 				<br />
 			</c:if>
-			<c:if test="${has_email eq false }">
+			<c:if test="${email eq null || email eq ''}">
 				<a href="/example/emailPage/">이메일 생성</a><br />
 			</c:if>
 			<br />
