@@ -6,6 +6,11 @@ public class KakaoDTO {
 	private String profile_image;
 	private String thumbnail_image;
 	private String email;
+	private Boolean has_email;
+	private Boolean email_needs_agreement;
+	private Boolean is_email_valid;
+	private Boolean is_email_verified;
+	
 	
 	public String getId() {
 		return id;
@@ -36,5 +41,30 @@ public class KakaoDTO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public Boolean getHas_email() {
+		return has_email;
+	}
+	public void setHas_email(Boolean has_email) {
+		this.has_email = has_email;
+	}
+	public Boolean getEmail_needs_agreement() {
+		return email_needs_agreement;
+	}
+	public void setEmail_needs_agreement(Boolean email_needs_agreement) {
+		this.email_needs_agreement = email_needs_agreement;
+	}
+	public Boolean getIs_email_valid() {
+		return is_email_valid;
+	}
+	public void setIs_email_valid(Boolean is_email_valid) {
+		this.is_email_valid = is_email_valid;
+	}
+	public Boolean getIs_email_verified() {
+		return is_email_verified;
+	}
+	public void setIs_email_verified(Boolean is_email_verified) {
+		this.is_email_verified = is_email_verified;
 	}
 }
