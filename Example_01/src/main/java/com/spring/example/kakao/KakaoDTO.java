@@ -6,8 +6,6 @@ public class KakaoDTO {
 	private String profile_image;
 	private String thumbnail_image;
 	private String email;
-	private String status;
-	private String created;
 	
 	public String getId() {
 		return id;
@@ -38,17 +36,5 @@ public class KakaoDTO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public String getCreated() {
-		return created;
-	}
-	public void setCreated(String created) {
-		this.created = created;
 	}
 }
