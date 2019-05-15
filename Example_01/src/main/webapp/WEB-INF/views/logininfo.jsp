@@ -22,30 +22,28 @@
 		<br />
 		<a href="/example/unlink/">사용자 연결 해제</a>
 		<br />
-		<c:if test="${userID ne null }">
+		<c:if test="${kakao.getId() ne null }">
 			<br />
 			<c:if test="${manager == 1}">
 				<a href="/example/userlist">사용자 목록</a>
 				<br />
 			</c:if>
-			<c:if test="${email eq null || email eq ''}">
+			<c:if test="${kakao.getEmail() eq null or kakao.getEmail() eq ''}">
 				<a href="/example/emailPage/">이메일 생성</a><br />
 			</c:if>
 			<br />
-			사용자 등록 ID : ${userID }
+			사용자 등록 ID : ${kakao.getId() }
 			<br />
-			사용자 닉네임 : ${nickname }
+			사용자 닉네임 : ${kakao.getNickname() }
 			<br />
-			사용자 프로필 이미지 : ${profileImageURL }
+			사용자 이메일 : ${kakao.getEmail() }
 			<br />
-			사용자 썸네일 이미지 : ${thumbnailURL }
+			<img src="${kakao.getProfile_image() }" width="500" height="640">
 			<br />
-			사용자 이메일 : ${email }
-			<br />
-			<br />
-			<img src="${profileImageURL }" width="500" height="640">
-			<br />
-			<img src="${thumbnailURL }" width="110" height="110">
+			<img src="${kakao.getThumbnail_image() }" width="110" height="110">
+			<hr/>
+			
+
 		</c:if>
 	</c:if>
 </body>
