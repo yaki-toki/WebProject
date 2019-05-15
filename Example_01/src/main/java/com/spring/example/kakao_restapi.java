@@ -19,6 +19,7 @@ import org.json.simple.JSONObject;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spring.example.kakao.KakaoDTO;
 
 public class kakao_restapi extends kakao_key{
 
@@ -106,9 +107,8 @@ public class kakao_restapi extends kakao_key{
 		return returnNode;
 	}
 
-	// 사용자 정보 요청
-	public JsonNode getKakaoUserInfo(String accessToken) {
-
+	public KakaoDTO userInfo(String accessToken) {
+		KakaoDTO model = new KakaoDTO();
 		final String RequestUrl = "https://kapi.kakao.com/v2/user/me";
 		final HttpClient client = HttpClientBuilder.create().build();
 		final HttpPost post = new HttpPost(RequestUrl);
@@ -125,13 +125,42 @@ public class kakao_restapi extends kakao_key{
 			// JSON 형태 반환값 처리
 			ObjectMapper mapper = new ObjectMapper();
 			returnNode = mapper.readTree(response.getEntity().getContent());
+			
+			JsonNode userProperties = returnNode.get("properties");
+			JsonNode userAccess = returnNode.get("kakao_account");
+			
+			model.setId(returnNode.get("id").toString());
+			model.setNickname(userProperties.get("nickname").toString());
+			try {
+				String profile_image = userProperties.get("profile_image").toString();
+				String thumbnail_image = userProperties.get("thumbnail_image").toString();
+				String email = userAccess.get("email").toString();
 
+				profile_image = profile_image.replace("\"", "");
+				thumbnail_image = thumbnail_image.replace("\"", "");
+				email = email.replace("\"", "");
+				
+				model.setProfile_image(profile_image);
+				model.setThumbnail_image(thumbnail_image);
+				model.setEmail(email);
+			}catch(Exception e) {
+				String email = userAccess.get("email").toString();
+				email = email.replace("\"", "");
+				model.setProfile_image("../resources/image/login.png");
+				model.setThumbnail_image("../resources/image/login.png");
+				model.setEmail(email);
+			}finally{
+				model.setHas_email(Boolean.valueOf(userAccess.get("has_email").toString()).booleanValue());
+				model.setEmail_needs_agreement(Boolean.valueOf(userAccess.get("email_needs_agreement").toString()).booleanValue());
+				model.setIs_email_valid(Boolean.valueOf(userAccess.get("is_email_valid").toString()).booleanValue());
+				model.setIs_email_verified(Boolean.valueOf(userAccess.get("is_email_verified").toString()).booleanValue());
+			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return returnNode;
+		return model;
 	}
 
 	// 사용자 동의 항목
