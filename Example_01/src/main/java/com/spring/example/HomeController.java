@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.spring.example.kakao.KakaoDTO;
 
 /**
  * Handles requests for the application home page.
@@ -76,7 +77,7 @@ public class HomeController extends kakao_key {
 
 	// 토큰 얻기
 	@RequestMapping(value = "/oauth", produces = "application/json")
-	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, HttpServletRequest request) {
+	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, HttpServletRequest request, Model model) {
 		System.out.println("---------------------- 토큰얻기 (oauth) -----------------------");
 		// 카카오 홈페이지에서 받은 결과 코드
 		System.out.println(code);
@@ -94,26 +95,8 @@ public class HomeController extends kakao_key {
 		session.setAttribute("token", token);
 		System.out.println("-----------------------------------------------------------");
 		System.out.println();
-
-		node = kr.getKakaoUserInfo(token);
-		System.out.println("사용자 정보 : " + node);
-		System.out.println("-----------------------------------------------------------");
-		System.out.println();
-		// node에 포함된 kakao_account정보
-		JsonNode userAccount = node.get("kakao_account");
-
-		String email = null;
-
-		try {
-			email = userAccount.get("email").toString();
-			if (email.equals("")) {
-				return "CreateEmail";
-			} else {
-				return "redirect:/info";
-			}
-		} catch (Exception e) {
-			return "CreateEmail";
-		}
+		
+		return "redirect:/info";
 	}
 
 	// 로그 아웃
@@ -154,75 +137,23 @@ public class HomeController extends kakao_key {
 
 	// 사용자 정보
 	@RequestMapping(value = "/info", produces = "application/json")
-	public String kakaoInfo(HttpSession session) {
+	public String kakaoInfo(HttpSession session, Model model) {
 		System.out.println("---------------------- 사용자정보 (info) ----------------------");
-
 		kakao_restapi kr = new kakao_restapi();
-		JsonNode node = kr.getKakaoUserInfo(session.getAttribute("token").toString());
-		System.out.println("사용자 정보 : " + node);
+		KakaoDTO kakao = kr.userInfo(session.getAttribute("token").toString());
 
-		// 사용자 ID
-		String userID = node.get("id").toString();
-
-		// node에 포함된 properties정보
-		JsonNode userInfo = node.get("properties");
-		// 사용자 nickname (첫 가입 시 등록된 nickname)
-		String nickname = userInfo.get("nickname").toString();
-
-		// node에 포함된 kakao_account정보
-		JsonNode userAccount = node.get("kakao_account");
-
-		// email 소유 여부 확인 변수
-		Boolean has_email = Boolean.valueOf(userAccount.get("has_email").toString()).booleanValue();
-		// 사용자 email변수
-		String email = null;
-		try {
-			// 이메일 소유
-			if (has_email) {
-				// 사용자 정보에 email이 있는 경우 생성
-				email = userAccount.get("email").toString();
-			} else {
+		// 이메일 소유
+		if (kakao.getHas_email()) {
+			if(kakao.getEmail().equals("") || kakao.getEmail().equals(null)) {
 				return "CreateEmail";
 			}
-
-		} catch (Exception e) {
-			email = userInfo.get("email").toString();
-		}
-		email = email.replace("\"", "");
-		session.setAttribute("email", email);
-
-		// 세션에 담아준다.
-		session.setAttribute("userID", userID);
-		session.setAttribute("nickname", nickname);
-
-		String profile_image = userInfo.get("profile_image").toString();
-		String thumbnail_image = userInfo.get("thumbnail_image").toString();
-
-		profile_image = profile_image.replace("\"", "");
-		thumbnail_image = thumbnail_image.replace("\"", "");
-		// 사용자 프로필 또는 썸네일이 하나라도 없는 경우
-		if (profile_image.equals("") || thumbnail_image.equals("")) {
-			// 로컬에 저장된 이미지를 출력
-			session.setAttribute("profileImageURL", "../resources/image/login.png");
-			session.setAttribute("thumbnailURL", "../resources/image/login.png");
 		} else {
-			// 프로필 사진과 썸네일이 모두 있는 경우 그대로 값을 사용
-			session.setAttribute("profileImageURL", profile_image);
-			session.setAttribute("thumbnailURL", thumbnail_image);
-		}
-
-		userID = userID.replace("\"", "");
-		// 관리자 페이지를 위한 새션 생성
-		if (userID.equals("1066011879")) {
-			// 관리자 ID : 1066011879 in kakao
-			session.setAttribute("manager", 1);
-		} else {
-			// 관리자가 아닌 경우
-			session.setAttribute("manager", 0);
+			return "CreateEmail";
 		}
 
 		System.out.println("-----------------------------------------------------------");
 		System.out.println();
+		model.addAttribute("kakao", kakao);
 		return "logininfo";
 	}
 
