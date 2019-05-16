@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -95,28 +96,22 @@ public class HomeController {
 		return "postUserData";
 	}
 
-	
-	@RequestMapping(value = "/block/userData", method = RequestMethod.POST)
-	public String requestParameter() {
+	@RequestMapping(value = "/userData", method = RequestMethod.POST)
+	public String requestParameter(HttpServletRequest request) {
 		GroupModel model = new GroupModel();
-		
-//		model.setGroupClass(groupClass);
-//		model.setGroupName(groupName);
-//		model.setUserEmail(userEmail);
-//		model.setAccount(account);
-//		model.setState(false);
-//		model.setOauth(oauth);
-		
+
 		model.setGroupClass("org.lego.network.Group");
-		model.setGroupName("admin");
-		model.setUserEmail("rlawlgk23@gmail.com");
-		model.setAccount("master");
+		model.setGroupName(request.getParameter("groupName"));
+		model.setUserEmail(request.getParameter("userEmail"));
+		model.setAccount(request.getParameter("account"));
 		model.setState(false);
 		model.setOauth("kakao");
-		
+
 		GroupPostMethod postMethod = new GroupPostMethod();
 		String result = postMethod.dataPost(model);
+
 		System.out.println(result);
+
 		return "home";
 	}
 }
