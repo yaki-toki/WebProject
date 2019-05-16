@@ -33,8 +33,6 @@ public class GroupPostMethod  extends ServerAddress{
 			data.addProperty("state", model.getState());
 			data.addProperty("oauth", model.getOauth());
 			
-			System.out.println(data);
-			
 			// 전송
 			OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
 			wr.write(data.toString());
