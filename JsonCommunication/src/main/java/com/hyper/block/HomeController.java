@@ -1,5 +1,9 @@
 package com.hyper.block;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -18,10 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.hyper.block.Group.GroupGetParser;
 import com.hyper.block.Group.GroupModel;
-import com.hyper.block.Group.GroupPostMethod;
-import com.hyper.block.Group.JsonGetGroup;
+import com.hyper.block.Group.JsonGroupImpl;
 
 /**
  * Handles requests for the application home page.
@@ -49,20 +51,21 @@ public class HomeController {
 	}
 
 	private String reqContext = null;
-	private JsonGetGroup jsonGetGroup;
+
+	private JsonGroupImpl serviceGroup = new JsonGroupImpl();
 
 	@RequestMapping(value = "/getgroup", method = RequestMethod.GET)
-	public String getGroup(Model model, HttpSession session) {
+	public String getGroup(Model model, HttpSession session)
+			throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception {
 
-		jsonGetGroup = new JsonGetGroup();
-		JsonArray jsonArray = jsonGetGroup.GetGroup();
+		// jsonGetGroup = new JsonGetGroup();
+		JsonArray jsonArray = serviceGroup.GetGroup();
 
 		GroupModel[] groupModel = new GroupModel[jsonArray.size()];
-		GroupGetParser parser = new GroupGetParser();
 
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JsonObject object = (JsonObject) jsonArray.get(i);
-			groupModel[i] = parser.getParser(object);
+			groupModel[i] = serviceGroup.getParser(object);
 		}
 		model.addAttribute("groupList", groupModel);
 
@@ -73,17 +76,19 @@ public class HomeController {
 
 	@RequestMapping(value = "/getById", method = RequestMethod.GET)
 	public String getGroupById(@RequestParam("userId") String userId, Model model, HttpSession session,
-			HttpServletResponse response) {
+			HttpServletResponse response)
+			throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception {
+
 		if (userId.equals("") || userId.equals(null)) {
 			reqContext = "getUserIdNull";
 			session.setAttribute("reqContext", reqContext);
 			return "home";
 		}
-		jsonGetGroup = new JsonGetGroup();
-		JsonObject object = jsonGetGroup.GetGroupById(userId);
+
+		JsonObject object = serviceGroup.GetGroupById(userId);
 		GroupModel groupModel = new GroupModel();
-		GroupGetParser parser = new GroupGetParser();
-		groupModel = parser.getParser(object);
+
+		groupModel = serviceGroup.getParser(object);
 		model.addAttribute("userModel", groupModel);
 		reqContext = "getGroupId";
 		session.setAttribute("reqContext", reqContext);
@@ -97,7 +102,8 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/userData", method = RequestMethod.POST)
-	public String requestParameter(HttpServletRequest request) {
+	public String requestParameter(HttpServletRequest request)
+			throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception {
 		GroupModel model = new GroupModel();
 
 		model.setGroupClass("org.lego.network.Group");
@@ -107,8 +113,7 @@ public class HomeController {
 		model.setState(false);
 		model.setOauth("kakao");
 
-		GroupPostMethod postMethod = new GroupPostMethod();
-		String result = postMethod.dataPost(model);
+		String result = serviceGroup.dataPost(model);
 
 		System.out.println(result);
 
