@@ -24,6 +24,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.hyper.block.Group.GroupModel;
 import com.hyper.block.Group.JsonGroupImpl;
+import com.hyper.block.GroupPay.JsonGroupPayImpl;
 
 /**
  * Handles requests for the application home page.
@@ -53,6 +54,7 @@ public class HomeController {
 	private String reqContext = null;
 
 	private JsonGroupImpl serviceGroup = new JsonGroupImpl();
+	private JsonGroupPayImpl serviceGroupPay = new JsonGroupPayImpl();
 
 	@RequestMapping(value = "/getgroup", method = RequestMethod.GET)
 	public String getGroup(Model model, HttpSession session)
@@ -85,7 +87,7 @@ public class HomeController {
 			return "home";
 		}
 
-		JsonObject object = serviceGroup.GetGroupById(userId);
+		JsonObject object = serviceGroup.GetGroupByEmail(userId);
 		GroupModel groupModel = new GroupModel();
 
 		groupModel = serviceGroup.getParser(object);
@@ -113,7 +115,7 @@ public class HomeController {
 		model.setState(false);
 		model.setOauth("kakao");
 
-		String result = serviceGroup.dataPost(model);
+		String result = serviceGroup.GroupPost(model);
 
 		System.out.println(result);
 
