@@ -24,7 +24,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.hyper.block.Group.GroupModel;
 import com.hyper.block.Group.JsonGroupImpl;
-import com.hyper.block.GroupPay.JsonGroupPayImpl;
+//import com.hyper.block.GroupPay.JsonGroupPayImpl;
 
 /**
  * Handles requests for the application home page.
@@ -54,7 +54,7 @@ public class HomeController {
 	private String reqContext = null;
 
 	private JsonGroupImpl serviceGroup = new JsonGroupImpl();
-	private JsonGroupPayImpl serviceGroupPay = new JsonGroupPayImpl();
+	//private JsonGroupPayImpl serviceGroupPay = new JsonGroupPayImpl();
 
 	@RequestMapping(value = "/getgroup", method = RequestMethod.GET)
 	public String getGroup(Model model, HttpSession session)
