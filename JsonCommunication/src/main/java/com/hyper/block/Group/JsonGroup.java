@@ -12,6 +12,6 @@ public interface JsonGroup{
 	public final String ipAddr = "http://localhost:3000/api/";
 	public GroupModel getParser(JsonObject object) throws Exception;
 	public JsonArray GetGroup() throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception;
-	public JsonObject GetGroupById(String email) throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception;
-	public String dataPost(GroupModel model) throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception;
+	public JsonObject GetGroupByEmail(String email) throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception;
+	public String GroupPost(GroupModel model) throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception;
 }

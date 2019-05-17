@@ -57,7 +57,7 @@ public class JsonGroupImpl implements JsonGroup {
 		return jsonArray;
 	}
 
-	public JsonObject GetGroupById(String email)
+	public JsonObject GetGroupByEmail(String email)
 			throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception {
 
 		JsonObject object = null;
@@ -79,7 +79,7 @@ public class JsonGroupImpl implements JsonGroup {
 		return object;
 	}
 
-	public String dataPost(GroupModel model)
+	public String GroupPost(GroupModel model)
 			throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception {
 		URL url = new URL(baseUrl);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
