@@ -9,7 +9,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 public interface JsonGroup{
-	public final String ipAddr = "http://210.123.254.231:3000/api/";
+	public final String ipAddr = "http://localhost:3000/api/";
 	public GroupModel getParser(JsonObject object) throws Exception;
 	public JsonArray GetGroup() throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception;
 	public JsonObject GetGroupById(String email) throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception;
