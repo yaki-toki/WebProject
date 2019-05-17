@@ -8,8 +8,6 @@ public class GroupModel {
 	private Boolean state;
 	private String oauth;
 	
-	public GroupModel() {}
-	
 	public String getGroupClass() {
 		return groupClass;
 	}
