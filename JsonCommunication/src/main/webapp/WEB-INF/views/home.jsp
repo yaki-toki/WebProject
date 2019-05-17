@@ -8,7 +8,8 @@
 </head>
 <style>
 table {
-	width: 100%;
+	width: 80%;
+	text-align:center;
 	border: 1px solid #444444;
 	border-collapse: collapse;
 }
