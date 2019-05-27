@@ -22,8 +22,11 @@ th, td {
 </style>
 <body>
 	<h1>Hello world!</h1>
-
+	
 	<P>The time on the server is ${serverTime}.</P>
+	<br />
+	<br />
+	<a href = "/block/newPage">New Page</a>
 	<br />
 	<%=session.getAttribute("reqContext")%>
 	<br />
