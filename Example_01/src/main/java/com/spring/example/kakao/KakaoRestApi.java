@@ -1,4 +1,4 @@
-package com.spring.example;
+package com.spring.example.kakao;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -19,9 +19,8 @@ import org.json.simple.JSONObject;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.example.kakao.KakaoDTO;
 
-public class kakao_restapi extends kakao_key{
+public class KakaoRestApi extends kakao_key{
 
 	private String client_id = kakao_key.client_id;
 	private String redirect_uri = kakao_key.redirect_uri;
