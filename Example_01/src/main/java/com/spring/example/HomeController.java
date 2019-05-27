@@ -21,6 +21,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.spring.example.kakao.KakaoDTO;
+import com.spring.example.kakao.kakao_key;
+import com.spring.example.kakao.KakaoRestApi;
 
 /**
  * Handles requests for the application home page.
@@ -84,7 +86,7 @@ public class HomeController extends kakao_key {
 		System.out.println("로그인 후 결과값");
 
 		// 카카오 rest api 객체 선언
-		kakao_restapi kr = new kakao_restapi();
+		KakaoRestApi kr = new KakaoRestApi();
 		// 결과값을 node에 담아줌
 		JsonNode node = kr.getAccessToken(code);
 		// 결과값 출력
@@ -109,7 +111,7 @@ public class HomeController extends kakao_key {
 				return "redirect:/";
 			} else {
 				// kakao restapi 객체 선언
-				kakao_restapi kr = new kakao_restapi();
+				KakaoRestApi kr = new KakaoRestApi();
 				// 노드에 로그아웃한 결과값음 담아줌 매개변수는 세션에 잇는 token을 가져와 문자열로 변환
 				JsonNode node = kr.Logout(session.getAttribute("token").toString());
 				// 결과 값 출력
@@ -139,7 +141,7 @@ public class HomeController extends kakao_key {
 	@RequestMapping(value = "/info", produces = "application/json")
 	public String kakaoInfo(HttpSession session, Model model) {
 		System.out.println("---------------------- 사용자정보 (info) ----------------------");
-		kakao_restapi kr = new kakao_restapi();
+		KakaoRestApi kr = new KakaoRestApi();
 		KakaoDTO kakao = kr.userInfo(session.getAttribute("token").toString());
 
 		// 이메일 소유
@@ -161,7 +163,7 @@ public class HomeController extends kakao_key {
 	@RequestMapping(value = "/agree", produces = "application/json")
 	public String kakaoAgree(HttpSession session, Model model) {
 		System.out.println("---------------------- 동의 항목 (agree) ----------------------");
-		kakao_restapi kr = new kakao_restapi();
+		KakaoRestApi kr = new KakaoRestApi();
 		JsonNode node = kr.getKakaoUserAgree(session.getAttribute("token").toString());
 		System.out.println("동적 동의 정보 : " + node);
 		System.out.println("-----------------------------------------------------------");
@@ -173,7 +175,7 @@ public class HomeController extends kakao_key {
 	@RequestMapping(value = "/setdata", produces = "application/json")
 	public String kakaoUserDataSave(HttpSession session) {
 		System.out.println("-------------------- 정보 저장 (setdata) ---------------------");
-		kakao_restapi kr = new kakao_restapi();
+		KakaoRestApi kr = new KakaoRestApi();
 
 		String autorize_code = session.getAttribute("token").toString(); // 로그인 시 얻은 사용자 토큰
 		String email = session.getAttribute("email").toString(); // 사용자 이메일
@@ -202,7 +204,7 @@ public class HomeController extends kakao_key {
 	@RequestMapping(value = "/userlist", produces = "application/json")
 	public String kakaoUserMemberList(HttpSession session) {
 		System.out.println("-------------------- 사용자 리스트 (userlist) ------------------");
-		kakao_restapi kr = new kakao_restapi();
+		KakaoRestApi kr = new KakaoRestApi();
 		String autorize_code = session.getAttribute("token").toString();
 		String userID = session.getAttribute("userID").toString(); // 사용자 ID
 
@@ -234,7 +236,7 @@ public class HomeController extends kakao_key {
 	public String kakaoUserUnlink(HttpSession session) {
 
 		System.out.println("---------------------- 회원탈퇴 (unlink) ----------------------");
-		kakao_restapi kr = new kakao_restapi();
+		KakaoRestApi kr = new KakaoRestApi();
 		String autorize_code = session.getAttribute("token").toString();
 		JsonNode node = kr.kakaoUserUnlink(autorize_code);
 		System.out.println("사용자 연결 해제 : " + node);
