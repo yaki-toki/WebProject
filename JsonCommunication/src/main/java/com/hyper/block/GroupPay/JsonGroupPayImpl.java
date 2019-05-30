@@ -105,7 +105,6 @@ public class JsonGroupPayImpl implements JsonGroupPay {
 		while ((inputLine = in.readLine()) != null) {
 			response.append(inputLine);
 		}
-		System.out.println(response.toString());
 		in.close();
 		return response.toString();
 	}

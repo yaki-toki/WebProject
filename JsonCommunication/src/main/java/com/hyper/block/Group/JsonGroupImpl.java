@@ -43,9 +43,10 @@ public class JsonGroupImpl implements JsonGroup {
 		JsonArray jsonArray = null;
 		URL url = new URL(baseUrl);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
+		
 		// 응답
 		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+		
 		String inputLine;
 		StringBuffer response = new StringBuffer();
 		while ((inputLine = in.readLine()) != null) {
@@ -109,7 +110,6 @@ public class JsonGroupImpl implements JsonGroup {
 		while ((inputLine = in.readLine()) != null) {
 			response.append(inputLine);
 		}
-		System.out.println(response.toString());
 		in.close();
 		return response.toString();
 	}
