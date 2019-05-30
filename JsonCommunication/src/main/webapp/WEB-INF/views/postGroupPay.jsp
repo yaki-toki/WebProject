@@ -8,5 +8,15 @@
 </head>
 <body>
 	<h2>New Controller Page</h2>
+	
+	<form action="/block/addGroup" method="POST">
+		
+		<table>
+			
+		</table>
+		
+		<input type="submit" value="전송">
+	</form>
+	
 </body>
 </html>
