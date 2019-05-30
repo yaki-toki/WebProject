@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class GroupPayController {
-	@RequestMapping(value = "/newPage", method = RequestMethod.GET)
+	
+	@RequestMapping(value = "/money", method = RequestMethod.GET)
 	public String NewPage() {
-		
 		System.out.println("New Controller");
-		
-		return "NewPage";
+		return "sendMoney";
 	}
 }
