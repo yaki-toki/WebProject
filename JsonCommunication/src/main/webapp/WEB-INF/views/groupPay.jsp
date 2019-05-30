@@ -56,9 +56,43 @@ th, td {
 	</form>
 
 	<br />
-	<br />
+
+	<form action="/block/getGroupPay" method="GET">
+		<h2>Group Information Search All Group</h2>
+		<table>
+			<tr style="margin: auto;">
+				<td colspan="2"><input style="width: 80%;" type="submit" value="조회"></td>
+			</tr>
+		</table>
+		<c:if test="${groupPayModel ne null }">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>클래스</th>
+						<th>그룹 명</th>
+						<th>회비 금액</th>
+						<th>납부 인원수</th>
+						<th>납부된 금액</th>
+					</tr>
+				</thead>
+				<c:forEach items="${groupPayModel }" var="groupPay">
+					<tbody>
+						<tr>
+							<td>${groupPay.getPayClass() }</td>
+							<td>${groupPay.getGroupName() }</td>
+							<td>${groupPay.getPay() }</td>
+							<td>${groupPay.getParticipantNum() }</td>
+							<td>${groupPay.getNowPay() }</td>
+						</tr>
+					</tbody>
+				</c:forEach>
+			</table>
+		</c:if>
+	</form>
+
+	<!-- GroupName로 정보 검색 -->
 	<form action="/block/searchGroup" method="GET">
-		<h2>Group Information Search</h2>
+		<h2>Group Information Search By Group Name</h2>
 		<table>
 			<tr style="margin: auto;">
 				<td><input style="width: 100%; height: 100%" type="text" name="group"></td>
