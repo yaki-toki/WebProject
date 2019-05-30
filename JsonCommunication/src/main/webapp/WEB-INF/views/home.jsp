@@ -26,9 +26,9 @@ th, td {
 	<P>The time on the server is ${serverTime}.</P>
 	<br />
 	<br />
-	<a href = "/block/newPage">New Page</a>
+	<a href = "/block/money">New Page</a>
 	<br />
-	<%=session.getAttribute("reqContext")%>
+	${reqContext }
 	<br />
 	<a href="/block/getgroup">Group Get</a>
 	<br />
