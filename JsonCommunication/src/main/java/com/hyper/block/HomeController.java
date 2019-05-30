@@ -113,7 +113,7 @@ public class HomeController {
 		model.setUserEmail(request.getParameter("userEmail"));
 		model.setAccount(request.getParameter("account"));
 		model.setState(false);
-		model.setOauth("kakao");
+		model.setOauth(request.getParameter("oauth"));
 
 		String result = serviceGroup.GroupPost(model);
 
