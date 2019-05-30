@@ -26,7 +26,7 @@ th, td {
 	<P>The time on the server is ${serverTime}.</P>
 	<br />
 	<br />
-	<a href = "/block/money">New Page</a>
+	<a href = "/block/postGroupPay">New Page</a>
 	<br />
 	${reqContext }
 	<br />
