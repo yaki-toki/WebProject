@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.hyper.block.Group.GroupModel;
 import com.hyper.block.Group.JsonGroupImpl;
+import com.hyper.block.db.service.MemberService;
 //import com.hyper.block.GroupPay.JsonGroupPayImpl;
 
 /**
@@ -37,8 +39,12 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	
+	@Inject
+	private MemberService dbService;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model) throws Exception {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
 		Date date = new Date();
@@ -47,20 +53,18 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 
 		model.addAttribute("serverTime", formattedDate);
-
+		
 		return "home";
 	}
 
 	private String reqContext = null;
 
 	private JsonGroupImpl serviceGroup = new JsonGroupImpl();
-	//private JsonGroupPayImpl serviceGroupPay = new JsonGroupPayImpl();
 
 	@RequestMapping(value = "/getgroup", method = RequestMethod.GET)
 	public String getGroup(Model model, HttpSession session)
 			throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception {
 
-		// jsonGetGroup = new JsonGetGroup();
 		JsonArray jsonArray = serviceGroup.GetGroup();
 
 		GroupModel[] groupModel = new GroupModel[jsonArray.size()];
@@ -114,11 +118,13 @@ public class HomeController {
 		model.setAccount(request.getParameter("account"));
 		model.setState(false);
 		model.setOauth(request.getParameter("oauth"));
+		
+		dbService.insertGroup(model);
 
 		String result = serviceGroup.GroupPost(model);
 
 		System.out.println(result);
-
+		
 		return "home";
 	}
 }
