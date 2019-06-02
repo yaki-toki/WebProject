@@ -1,6 +1,7 @@
 package com.hyper.block;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -108,22 +109,30 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/userData", method = RequestMethod.POST)
-	public String requestParameter(HttpServletRequest request)
+	public String requestParameter(HttpServletRequest request, HttpServletResponse response)
 			throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception {
-		GroupModel model = new GroupModel();
-
-		model.setGroupClass("org.lego.network.Group");
-		model.setGroupName(request.getParameter("groupName"));
-		model.setUserEmail(request.getParameter("userEmail"));
-		model.setAccount(request.getParameter("account"));
-		model.setState(false);
-		model.setOauth(request.getParameter("oauth"));
 		
-		dbService.insertGroup(model);
+		int user = dbService.selectGroupUserEmail(request.getParameter("userEmail"));
+		
+		if(user == 1) {
+			request.setAttribute("user",1);
+			return "home";
+		}else {
+			GroupModel model = new GroupModel();
 
-		String result = serviceGroup.GroupPost(model);
+			model.setGroupClass("org.lego.network.Group");
+			model.setGroupName(request.getParameter("groupName"));
+			model.setUserEmail(request.getParameter("userEmail"));
+			model.setAccount(request.getParameter("account"));
+			model.setState(false);
+			model.setOauth(request.getParameter("oauth"));
+			
+			dbService.insertGroup(model);
 
-		System.out.println(result);
+			String result = serviceGroup.GroupPost(model);
+
+			System.out.println(result);
+		}
 		
 		return "home";
 	}
