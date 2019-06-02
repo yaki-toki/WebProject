@@ -34,6 +34,11 @@ th, td {
 	<a href="/block/postUserData">Group Post</a>	
 	<br />
 	<br />
+	<c:if test="${user == 1 }">
+		<script>
+			alert("동일한 이메일이 있습니다.");
+		</script>
+	</c:if>
 	<form action="/block/getById" method="get">
 		검색하실 아이디를 입력해 주세요<br /> <input type="text" id="userId" name="userId">
 		<input type="submit">
@@ -96,25 +101,5 @@ th, td {
 			</tbody>
 		</table>
 	</c:if>
-	
-	<table>
-        <thead>
-            <tr>
-                <th>아이디</th>
-                <th>비밀번호</th>
-                <th>이름</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach items="${memberList}" var="member">
-                <tr>
-                    <td>${member.id}</td>
-                    <td>${member.pw}</td>
-                    <td>${member.name}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-
 </body>
 </html>
