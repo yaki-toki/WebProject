@@ -96,5 +96,25 @@ th, td {
 			</tbody>
 		</table>
 	</c:if>
+	
+	<table>
+        <thead>
+            <tr>
+                <th>아이디</th>
+                <th>비밀번호</th>
+                <th>이름</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${memberList}" var="member">
+                <tr>
+                    <td>${member.id}</td>
+                    <td>${member.pw}</td>
+                    <td>${member.name}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+
 </body>
 </html>
