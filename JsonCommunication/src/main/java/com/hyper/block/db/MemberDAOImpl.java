@@ -25,4 +25,9 @@ public class MemberDAOImpl implements MemberDAO{
 	public void insertGroup(GroupModel model) {
 		sqlSession.insert(Namespace+".insertGroup", model);
 	}
+	
+	@Override
+	public int selectGroupUserEmail(String userEmail) {
+		return sqlSession.selectOne(Namespace+".selectGroupUserEmail", userEmail );
+	}
 }

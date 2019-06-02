@@ -13,7 +13,7 @@ import com.hyper.block.db.MemberVO;
 @Service
 public class MemberServiceImpl implements MemberService {
  
-    @Inject
+    @Inject 
     private MemberDAO dao;
     
     @Override
@@ -24,6 +24,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void insertGroup(GroupModel model) {
     	dao.insertGroup(model);
+    }
+    
+    @Override
+    public int selectGroupUserEmail(String userEmail) {
+    	return dao.selectGroupUserEmail(userEmail);
     }
     
 }
