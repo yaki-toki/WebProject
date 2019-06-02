@@ -12,5 +12,9 @@
 	<insert id="insertGroup" parameterType="GroupModel">
 		insert into `group` value(#{groupClass}, #{groupName}, #{userEmail}, #{account}, #{state}, #{oauth})
 	</insert>
+	
+	<select id="selectGroupUserEmail" parameterType="String"  resultType="int">
+		select count(*) from `group` where userEmail = #{userEmail}
+	</select>
 
 </mapper>
