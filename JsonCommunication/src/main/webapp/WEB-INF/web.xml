@@ -40,11 +40,6 @@
 		<exception-type>java.io.FileNotFoundException</exception-type>
 		<location>/errors/error.jsp</location>
 	</error-page>
-	
-	<error-page>
-		<exception-type>java.io.IOException</exception-type>
-		<location>/errors/error422.jsp</location>
-	</error-page>
 
 	<error-page>
 		<error-code>404</error-code>
