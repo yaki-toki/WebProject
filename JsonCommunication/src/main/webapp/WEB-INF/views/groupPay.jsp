@@ -4,30 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
 <title>Insert title here</title>
 </head>
-<style>
-table {
-	width: 40%;
-	text-align: center;
-	border: 1px solid #444444;
-	border-collapse: collapse;
-}
-
-th, td {
-	border: 1px solid #444444;
-	padding: 10px;
-	text-align: center;
-}
-</style>
 <body>
 	<h1>Group Information</h1>
 
 	<form action="/block/addGroup" method="POST">
 		<h2>Group Information Send Server</h2>
 		<br />
-		<table>
+		<table class="table">
 			<thead>
 				<tr>
 					<td>유형</td>
@@ -59,7 +49,7 @@ th, td {
 
 	<form action="/block/getGroupPay" method="GET">
 		<h2>Group Information Search All Group</h2>
-		<table>
+		<table class="table">
 			<tr style="margin: auto;">
 				<td colspan="2"><input style="width: 80%;" type="submit" value="조회"></td>
 			</tr>
@@ -101,7 +91,7 @@ th, td {
 		</table>
 		<c:if test="${groupPay ne null }">
 			<br />
-			<table class="table table-hover">
+			<table class="table">
 				<thead>
 					<tr>
 						<th>클래스</th>
