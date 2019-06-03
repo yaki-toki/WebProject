@@ -5,11 +5,16 @@
 <html>
 <head>
 <title>Home</title>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
 </head>
 <style>
 table {
 	width: 80%;
-	text-align:center;
+	text-align: center;
 	border: 1px solid #444444;
 	border-collapse: collapse;
 }
@@ -20,18 +25,20 @@ th, td {
 	text-align: center;
 }
 </style>
-<body>
-	<h1>Hello world!</h1>
-	
-	<P>The time on the server is ${serverTime}.</P>
-	<br />
-	<a href = "/block/groupPay">GroupPay Page</a>
+<body class="container">
+	<div class="jumbotron">
+		<h1>Hello world!</h1>
+
+		<P>The time on the server is ${serverTime}.</P>
+		<br />
+	</div>
+	<a href="/block/groupPay">GroupPay Page</a>
 	<br />
 	<br />
 	<a href="/block/getgroup">Group Get</a>
 	<br />
 	<br />
-	<a href="/block/postUserData">Group Post</a>	
+	<a href="/block/postUserData">Group Post</a>
 	<br />
 	<br />
 	<c:if test="${user == 1 }">
@@ -70,13 +77,13 @@ th, td {
 			</c:forEach>
 		</table>
 	</c:if>
-	
+
 	<c:if test="${reqContext eq 'getUserIdNull' }">
 		<script>
 			alert("사용자 명을 입력해 주세요");
 		</script>
 	</c:if>
-	
+
 	<c:if test="${reqContext eq 'getGroupId' }">
 		<table>
 			<thead>
