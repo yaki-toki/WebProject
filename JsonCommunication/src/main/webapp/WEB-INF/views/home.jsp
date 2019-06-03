@@ -11,35 +11,15 @@
 <!-- Bootstrap CSS -->
 <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
 </head>
-<style>
-table {
-	width: 80%;
-	text-align: center;
-	border: 1px solid #444444;
-	border-collapse: collapse;
-}
-
-th, td {
-	border: 1px solid #444444;
-	padding: 10px;
-	text-align: center;
-}
-</style>
 <body class="container">
-	<div class="jumbotron">
-		<h1>Hello world!</h1>
-
-		<P>The time on the server is ${serverTime}.</P>
-		<br />
+	<div class="jumbotron" style="padding-bottom:30px; margin-top:20px;">
+		<h2> LEGO - Blockchain & Book of accounts </h2>
 	</div>
-	<a href="/block/groupPay">GroupPay Page</a>
-	<br />
-	<br />
-	<a href="/block/getgroup">Group Get</a>
-	<br />
-	<br />
-	<a href="/block/postUserData">Group Post</a>
-	<br />
+	<ul class="nav nav-tabs">
+		<li><a href="/block/groupPay">GroupPay Page</a></li>
+		<li><a href="/block/getgroup">Group Get</a></li>
+		<li><a href="/block/postUserData">Group Post</a></li>
+	</ul>
 	<br />
 	<c:if test="${user == 1 }">
 		<script>
@@ -52,7 +32,7 @@ th, td {
 	</form>
 	<br />
 	<c:if test="${reqContext eq 'getgroup' }">
-		<table class="table table-hover">
+		<table class="table table-hover" style="width:100%">
 			<thead>
 				<tr>
 					<th>클래스</th>
@@ -85,7 +65,7 @@ th, td {
 	</c:if>
 
 	<c:if test="${reqContext eq 'getGroupId' }">
-		<table>
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>클래스</th>
@@ -108,5 +88,9 @@ th, td {
 			</tbody>
 		</table>
 	</c:if>
+	<br />
+	<div class="jumbotron" style="margin-top:5px; padding:5px;">
+		<h6 style="text-align:center;">Copyright (C) 2019. KimJiHa & KimHyeWon. All rights reserved.</h6>
+	</div>
 </body>
 </html>
