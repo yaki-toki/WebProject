@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.hyper.block.GroupPay.GroupPayModel;
 import com.hyper.block.GroupPay.JsonGroupPayImpl;
 
@@ -35,14 +36,14 @@ public class GroupPayController {
 			throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception {
 
 		JsonArray jsonArray = service.GetGroupPay();
-
+		
 		GroupPayModel[] groupPayModel = new GroupPayModel[jsonArray.size()];
 
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JsonObject object = (JsonObject) jsonArray.get(i);
 			groupPayModel[i] = service.getParser(object);
+			
 		}
-		
 		model.addAttribute("groupPayModel", groupPayModel);
 
 		return "groupPay";
