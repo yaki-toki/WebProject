@@ -9,10 +9,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.text.ParseException;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.hyper.block.util.TimeParser;
 
 public class JsonGroupPayImpl implements JsonGroupPay {
 
@@ -33,6 +35,27 @@ public class JsonGroupPayImpl implements JsonGroupPay {
 		model.setParticipantNum(participantNum);
 		model.setNowPay(nowPay);
 
+		return model;
+	}
+
+	public GroupPayUserModel getUserParser(JsonObject object) throws ParseException {
+		GroupPayUserModel model = new GroupPayUserModel();
+		TimeParser timeParser = new TimeParser();
+		
+		String userClass = object.get("$class").getAsString();
+		String accoutant = object.get("accoutant").getAsString();
+		String normal = object.get("normal").getAsString();
+		String groupPay = object.get("groupPay").getAsString();
+		String transactionId = object.get("transactionId").getAsString();
+		String timestamp = object.get("timestamp").getAsString();
+		
+		model.setUserClass(userClass);
+		model.setAccoutant(accoutant);
+		model.setNormal(normal);
+		model.setGroupPay(groupPay);
+		model.setTransactionId(transactionId);
+		model.setTimestamp(timeParser.UTCParser(timestamp));
+		
 		return model;
 	}
 
