@@ -25,32 +25,16 @@ select {
 	<div class="jumbotron" style="margin-top:5px; padding:5px;">
 		<h3 style="text-align:center;">User Group Post</h3>
 	</div>
+	<c:if test="${newEmail ne null}">
+		<script>
+			alert("이메일을 등록해 주세요");
+		</script>
+	</c:if>
 	<form action="/block/userData" method="post">
 		<table class="table table-hover" style="width:50%; margin:center;">
 			<tr>
-				<td style="text-align:center;">그룹 이름</td>
-				<td><input type="text" style="width:100%;" name="groupName" required></td>
-			</tr>
-			<tr>
 				<td style="text-align:center;">사용자 이메일</td>
-				<td><input type="text" style="width:100%;" name="userEmail" required></td>
-			</tr>
-			<tr>
-				<td style="text-align:center;">사용자 권한</td>
-				<td><select name="account">
-						<option value="master">회장</option>
-						<option value="accoutant">회계</option>
-						<option value="normal">일반</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td style="text-align:center;">가입 유형</td>
-				<td><select name="oauth">
-						<option value="kakao">카카오</option>
-						<option value="naver">네이버</option>
-						<option value="google">구글</option>
-						<option value="nothing">일반</option>
-				</select></td>
+				<td><input type="email" style="width:100%;" name="userEmail" value="${newEmail }" required></td>
 			</tr>
 			<tfoot>
 				<tr>
