@@ -120,11 +120,7 @@ public class HomeController {
 			GroupModel model = new GroupModel();
 
 			model.setGroupClass("org.lego.network.Group");
-			model.setGroupName(request.getParameter("groupName"));
 			model.setUserEmail(request.getParameter("userEmail"));
-			model.setAccount(request.getParameter("account"));
-			model.setState(false);
-			model.setOauth(request.getParameter("oauth"));
 			
 			dbService.insertGroup(model);
 
