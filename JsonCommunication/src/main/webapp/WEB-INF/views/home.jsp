@@ -56,8 +56,14 @@
 			alert("사용자 명을 입력해 주세요");
 		</script>
 	</c:if>
+	
+	<c:if test="${reqContext eq 'getUserIdZero' }">
+		<script>
+			alert("등록된 사용자가 없습니다.");
+		</script>
+	</c:if>
 
-	<c:if test="${reqContext eq 'getGroupId' }">
+	<c:if test="${userModel ne null }">
 		<h2>${userModel.getUserEmail() }</h2>
 		<table class="table table-hover">
 			<thead>
@@ -68,13 +74,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="num" begin="0" end="${userModel.getGroupName().size() -1 }" step="1">
-					<tr>
-						<td>${userModel.getGroupName().get(num).toString() }</td>
-						<td>${userModel.getGroupState().get(num).toString() }</td>
-						<td>${userModel.getGroupAccount().get(num).toString() }</td>
-					</tr>
-				</c:forEach>
+				<c:if test="${userModel.getGroupName().size() ne 0 }">
+					<c:forEach var="num" begin="0" end="${userModel.getGroupName().size() -1 }" step="1">
+						<tr>
+							<td>${userModel.getGroupName().get(num).toString() }</td>
+							<td>${userModel.getGroupState().get(num).toString() }</td>
+							<td>${userModel.getGroupAccount().get(num).toString() }</td>
+						</tr>
+					</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 	</c:if>
