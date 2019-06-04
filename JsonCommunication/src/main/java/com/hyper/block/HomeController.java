@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.hyper.block.Group.GroupDBModel;
 import com.hyper.block.Group.GroupModel;
 import com.hyper.block.Group.JsonGroupImpl;
+import com.hyper.block.Query.JsonQueryImpl;
 import com.hyper.block.db.service.MemberService;
 //import com.hyper.block.GroupPay.JsonGroupPayImpl;
 
@@ -60,6 +62,7 @@ public class HomeController {
 	private String reqContext = null;
 
 	private JsonGroupImpl serviceGroup = new JsonGroupImpl();
+	private JsonQueryImpl queryImpl = new JsonQueryImpl();
 
 	@RequestMapping(value = "/getgroup", method = RequestMethod.GET)
 	public String getGroup(Model model, HttpSession session)
@@ -82,7 +85,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/getById", method = RequestMethod.GET)
 	public String getGroupById(@RequestParam("userId") String userId, Model model, HttpSession session,
-			HttpServletResponse response)
+			HttpServletResponse response, HttpServletRequest request)
 			throws MalformedURLException, ProtocolException, UnsupportedEncodingException, IOException, Exception {
 
 		if (userId.equals("") || userId.equals(null)) {
@@ -90,12 +93,19 @@ public class HomeController {
 			session.setAttribute("reqContext", reqContext);
 			return "home";
 		}
+		
+		int userCount = queryImpl.SelectUserEmail(userId);
+		if(userCount == 0) {
+			session.setAttribute("newEmail", userId);
+			return "redirect:/postUserData";
+		}
 
 		JsonObject object = serviceGroup.GetGroupByEmail(userId);
 		GroupModel groupModel = new GroupModel();
 
 		groupModel = serviceGroup.getParser(object);
 		model.addAttribute("userModel", groupModel);
+		
 		reqContext = "getGroupId";
 		session.setAttribute("reqContext", reqContext);
 		return "home";
@@ -118,11 +128,15 @@ public class HomeController {
 			return "home";
 		}else {
 			GroupModel model = new GroupModel();
+			GroupDBModel dbmodel = new GroupDBModel();
 
 			model.setGroupClass("org.lego.network.Group");
 			model.setUserEmail(request.getParameter("userEmail"));
 			
-			dbService.insertGroup(model);
+			dbmodel.setGroupClass("org.lego.network.Group");
+			dbmodel.setUserEmail(request.getParameter("userEmail"));
+			
+			dbService.insertGroup(dbmodel);
 
 			String result = serviceGroup.GroupPost(model);
 
