@@ -1,12 +1,13 @@
 package com.hyper.block.Group;
 
+import java.util.ArrayList;
+
 public class GroupModel {
 	private String groupClass;
-	private String groupName;
+	private ArrayList<String> groupName;
+	private ArrayList<Boolean> groupState;
+	private ArrayList<String> groupAccount;
 	private String userEmail;
-	private String account;
-	private Boolean state;
-	private String oauth;
 	
 	public String getGroupClass() {
 		return groupClass;
@@ -14,34 +15,28 @@ public class GroupModel {
 	public void setGroupClass(String groupClass) {
 		this.groupClass = groupClass;
 	}
-	public String getGroupName() {
+	public ArrayList<String> getGroupName() {
 		return groupName;
 	}
-	public void setGroupName(String groupName) {
+	public void setGroupName(ArrayList<String> groupName) {
 		this.groupName = groupName;
+	}
+	public ArrayList<Boolean> getGroupState() {
+		return groupState;
+	}
+	public void setGroupState(ArrayList<Boolean> groupState) {
+		this.groupState = groupState;
+	}
+	public ArrayList<String> getGroupAccount() {
+		return groupAccount;
+	}
+	public void setGroupAccount(ArrayList<String> groupAccount) {
+		this.groupAccount = groupAccount;
 	}
 	public String getUserEmail() {
 		return userEmail;
 	}
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
-	}
-	public String getAccount() {
-		return account;
-	}
-	public void setAccount(String account) {
-		this.account = account;
-	}
-	public Boolean getState() {
-		return state;
-	}
-	public void setState(Boolean state) {
-		this.state = state;
-	}
-	public String getOauth() {
-		return oauth;
-	}
-	public void setOauth(String oauth) {
-		this.oauth = oauth;
 	}
 }

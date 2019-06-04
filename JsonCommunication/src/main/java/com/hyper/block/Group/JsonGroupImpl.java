@@ -9,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -22,18 +23,34 @@ public class JsonGroupImpl implements JsonGroup {
 		GroupModel model = new GroupModel();
 
 		String GroupClass = object.get("$class").getAsString();
-		String groupName = object.get("groupName").getAsString();
+		JsonArray groupName = object.get("groupName").getAsJsonArray();
+		JsonArray groupState = object.get("groupState").getAsJsonArray();
+		JsonArray groupAccount = object.get("groupAccount").getAsJsonArray();
 		String userEmail = object.get("userEmail").getAsString();
-		String account = object.get("account").getAsString();
-		Boolean state = object.get("state").getAsBoolean();
-		String oauth = object.get("oauth").getAsString();
-
+		
+		// 그룹 명 리스트
+		ArrayList<String> name = new ArrayList<String>();
+		for(int j = 0; j < groupName.size(); j++) {
+			name.add(groupName.get(j).toString());
+		}
+		
+		// 그룹별 해당 상태 리스트
+		ArrayList<Boolean> state = new ArrayList<Boolean>();
+		for(int j = 0; j < groupState.size(); j++) {
+			state.add(groupState.get(j).getAsBoolean());
+		}
+		
+		// 그룹별 해당 권한 리스트
+		ArrayList<String> account = new ArrayList<String>();
+		for(int i = 0; i < groupAccount.size(); i++) {
+			account.add(groupAccount.get(i).toString());
+		}
+		
 		model.setGroupClass(GroupClass);
-		model.setGroupName(groupName);
+		model.setGroupName(name);
+		model.setGroupState(state);
+		model.setGroupAccount(account);
 		model.setUserEmail(userEmail);
-		model.setAccount(account);
-		model.setState(state);
-		model.setOauth(oauth);
 
 		return model;
 	}
@@ -92,11 +109,7 @@ public class JsonGroupImpl implements JsonGroup {
 		// 데이터
 		JsonObject data = new JsonObject();
 		data.addProperty("$class", model.getGroupClass());
-		data.addProperty("groupName", model.getGroupName());
 		data.addProperty("userEmail", model.getUserEmail());
-		data.addProperty("account", model.getAccount());
-		data.addProperty("state", model.getState());
-		data.addProperty("oauth", model.getOauth());
 
 		// 전송
 		OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
