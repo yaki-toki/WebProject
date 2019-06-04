@@ -9,8 +9,8 @@
 		SELECT ID, PW ,NAME FROM TEST
 	</select>
 	
-	<insert id="insertGroup" parameterType="GroupModel">
-		insert into `group` value(#{groupClass}, #{groupName}, #{userEmail}, #{account}, #{state}, #{oauth})
+	<insert id="insertGroup" parameterType="GroupDBModel">
+		insert into `group` value(#{groupClass}, #{userEmail})
 	</insert>
 	
 	<select id="selectGroupUserEmail" parameterType="String"  resultType="int">

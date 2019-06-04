@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.hyper.block.Group.GroupModel;
+import com.hyper.block.Group.GroupDBModel;
 import com.hyper.block.db.MemberDAO;
 import com.hyper.block.db.MemberVO;
 
@@ -22,8 +22,8 @@ public class MemberServiceImpl implements MemberService {
     }
     
     @Override
-    public void insertGroup(GroupModel model) {
-    	dao.insertGroup(model);
+    public void insertGroup(GroupDBModel dbmodel) {
+    	dao.insertGroup(dbmodel);
     }
     
     @Override

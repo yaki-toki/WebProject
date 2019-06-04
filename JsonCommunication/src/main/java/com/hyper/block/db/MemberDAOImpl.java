@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hyper.block.Group.GroupModel;
+import com.hyper.block.Group.GroupDBModel;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO{
@@ -22,8 +22,8 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
-	public void insertGroup(GroupModel model) {
-		sqlSession.insert(Namespace+".insertGroup", model);
+	public void insertGroup(GroupDBModel dbmodel) {
+		sqlSession.insert(Namespace+".insertGroup", dbmodel);
 	}
 	
 	@Override
