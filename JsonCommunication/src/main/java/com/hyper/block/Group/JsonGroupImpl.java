@@ -14,12 +14,16 @@ import java.util.ArrayList;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.hyper.block.util.ResourceParser;
 
 public class JsonGroupImpl implements JsonGroup {
 
 	private String baseUrl = ipAddr + "Group";
 
 	public GroupModel getParser(JsonObject object) {
+		
+		ResourceParser parser = new ResourceParser();
+		
 		GroupModel model = new GroupModel();
 
 		String GroupClass = object.get("$class").getAsString();
@@ -31,7 +35,7 @@ public class JsonGroupImpl implements JsonGroup {
 		// 그룹 명 리스트
 		ArrayList<String> name = new ArrayList<String>();
 		for(int j = 0; j < groupName.size(); j++) {
-			name.add(groupName.get(j).toString());
+			name.add(parser.quotationParser(groupName.get(j).toString()));
 		}
 		
 		// 그룹별 해당 상태 리스트
@@ -43,7 +47,7 @@ public class JsonGroupImpl implements JsonGroup {
 		// 그룹별 해당 권한 리스트
 		ArrayList<String> account = new ArrayList<String>();
 		for(int i = 0; i < groupAccount.size(); i++) {
-			account.add(groupAccount.get(i).toString());
+			account.add(parser.quotationParser(groupAccount.get(i).toString()));
 		}
 		
 		model.setGroupClass(GroupClass);
