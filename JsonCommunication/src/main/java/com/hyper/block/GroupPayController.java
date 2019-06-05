@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.hyper.block.GroupPay.GroupPayModel;
+import com.hyper.block.GroupPay.GroupPayUserModel;
 import com.hyper.block.GroupPay.JsonGroupPayImpl;
 
 @Controller
@@ -59,9 +60,26 @@ public class GroupPayController {
 
 		JsonObject groupPay = service.GetGroupPayByName(groupName);
 		GroupPayModel groupPayModel = new GroupPayModel();
-
+		
+		JsonArray groupPayUser = groupPay.get("user").getAsJsonArray();
+		GroupPayUserModel[] groupPayUserModel = new GroupPayUserModel[groupPayUser.size()];
+		
+		for(int i = 0; i < groupPayUser.size(); i++) {
+			JsonObject object = (JsonObject) groupPayUser.get(i);
+			groupPayUserModel[i] = service.getUserParser(object);
+		}
+		
+		for(int i = 0; i < groupPayUser.size(); i++) {
+			System.out.println(groupPayUserModel[i].getGroupPay());
+			System.out.println(groupPayUserModel[i].getNormal());
+			System.out.println(groupPayUserModel[i].getAccoutant());
+			System.out.println(groupPayUserModel[i].getTransactionId());
+			System.out.println(groupPayUserModel[i].getTimestamp());
+		}
+		
 		groupPayModel = service.getParser(groupPay);
 		model.addAttribute("groupPay", groupPayModel);
+		model.addAttribute("groupPayUser", groupPayUserModel);
 
 		return "groupPay";
 	}

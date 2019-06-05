@@ -111,6 +111,29 @@
 					</tr>
 				</tbody>
 			</table>
+			
+			<table class="table">
+				<thead>
+					<tr>
+						<th>그룹</th>
+						<th>일반</th>
+						<th>회계</th>
+						<th>ID값</th>
+						<th>시간</th>
+					</tr>
+				</thead>
+				<c:forEach items="${groupPayUserModel }" var="groupPayUser">
+					<tbody>
+						<tr>
+							<td>${groupPayUser.getGroupPay() }</td>
+							<td>${groupPayUser.getNormal() }</td>
+							<td>${groupPayUser.getAccoutant() }</td>
+							<td>${groupPayUser.getTransactionId() }</td>
+							<td>${groupPayUser.getTimestamp() }</td>
+						</tr>
+					</tbody>
+				</c:forEach>
+			</table>
 		</c:if>
 	</form>
 </body>
