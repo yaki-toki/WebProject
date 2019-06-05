@@ -6,15 +6,17 @@
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Bootstrap CSS -->
 <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
+
 <title>Insert title here</title>
 </head>
 <body>
 	<h1>Group Information</h1>
 
-	<form action="/block/addGroup" method="POST">
+	<form style="width:40%;" action="/block/addGroup" method="POST">
 		<h2>Group Information Send Server</h2>
 		<br />
 		<table class="table">
@@ -27,19 +29,17 @@
 			<tbody>
 				<tr>
 					<td>Group Name</td>
-					<td><input style="width: 100%" type="text" name="groupName"
-						required></td>
+					<td><input type="text" name="groupName" required></td>
 				</tr>
 				<tr>
 					<td>Group Pay</td>
-					<td><input style="width: 100%" type="number" name="pay"
-						min="0" step="1000" required></td>
+					<td><input type="number" name="pay" min="0" step="1000"
+						required></td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="2"><input style="width: 80%" type="submit"
-						value="전송"></td>
+					<td colspan="2"><input type="submit" value="전송"></td>
 				</tr>
 			</tfoot>
 		</table>
@@ -47,11 +47,11 @@
 
 	<br />
 
-	<form action="/block/getGroupPay" method="GET">
+	<form style="width:40%;" action="/block/getGroupPay" method="GET">
 		<h2>Group Information Search All Group</h2>
 		<table class="table">
 			<tr style="margin: auto;">
-				<td colspan="2"><input style="width: 80%;" type="submit" value="조회"></td>
+				<td colspan="2"><input type="submit" value="조회"></td>
 			</tr>
 		</table>
 		<c:if test="${groupPayModel ne null }">
@@ -81,12 +81,12 @@
 	</form>
 
 	<!-- GroupName로 정보 검색 -->
-	<form action="/block/searchGroup" method="GET">
+	<form style="width:40%;" action="/block/searchGroup" method="GET">
 		<h2>Group Information Search By Group Name</h2>
 		<table>
 			<tr style="margin: auto;">
-				<td><input style="width: 100%; height: 100%" type="text" name="group"></td>
-				<td><input style="width: 100%; height: 100%" type="submit" value="검색"></td>
+				<td><input type="text" name="group"></td>
+				<td><input type="submit" value="검색"></td>
 			</tr>
 		</table>
 		<c:if test="${groupPay ne null }">
