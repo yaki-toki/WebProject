@@ -63,8 +63,18 @@
 		</script>
 	</c:if>
 
-	<c:if test="${userModel ne null }">
+	<c:if test="${userModel ne null}">
 		<h2>${userModel.getUserEmail() }</h2>
+		
+		<c:if test="${userModel.getUserEmail() ne null }">
+		
+			<form action="/block/userAddGroup" method="POST">
+				<input type="hidden" name="userModelEmail" value="${userModel.getUserEmail() }">
+				<input type="submit" value="그룹 추가">
+			</form>
+			
+		</c:if>
+		
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -88,8 +98,7 @@
 	</c:if>
 	<br />
 	<div class="jumbotron" style="margin-top: 5px; padding: 5px;">
-		<h6 style="text-align: center;">Copyright (C) 2019. KimJiHa &
-			KimHyeWon. All rights reserved.</h6>
+		<h6 style="text-align: center;">Copyright (C) 2019. KimJiHa & KimHyeWon. All rights reserved.</h6>
 	</div>
 </body>
 </html>
